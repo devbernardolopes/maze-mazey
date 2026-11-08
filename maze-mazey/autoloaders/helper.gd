@@ -26,22 +26,18 @@ const BOXES: int = 2
 const GOALS: int = 4
 const ENTITIES: int = 8
 
-
-func has_property(node: Object, property: StringName) -> bool:
-	if not node:
-		return false
-	if not property:
-		return false
-	var properties: Array[Dictionary] = node.get_property_list()
-	if not properties:
-		return false
-	if properties.is_empty():
-		return false
-	for i in properties.size():
-		var _p: Dictionary = properties[i]
-		var _v = _p.find_key("name")
-		if not _v:
-			return false
-		if _v == property:
-			return true
-	return false
+## Returns the collider occupying the cell centred on `world_position`, or
+## null when the cell is free. `exclude_rid` lets the caller ignore itself.
+## Must be called during the physics step (direct space state access).
+func get_grid_occupant(world_position: Vector2, exclude_rid: RID) -> Object:
+	var space_state: PhysicsDirectSpaceState2D = get_tree().root.get_world_2d().direct_space_state
+	var query: PhysicsPointQueryParameters2D = PhysicsPointQueryParameters2D.new()
+	query.position = world_position
+	query.collision_mask = WALLS | BOXES | ENTITIES
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.exclude = [exclude_rid]
+	var hits: Array[Dictionary] = space_state.intersect_point(query, 1)
+	if hits.is_empty():
+		return null
+	return hits[0].get("collider") as Object

@@ -17,15 +17,10 @@ func _ready() -> void:
 	collision = CollisionShape2D.new()
 	collision.shape = RectangleShape2D.new()
 	(collision.shape as RectangleShape2D).size = Vector2.ONE * Helper.TILE_SIZE
-	collision_layer = Helper.BOXES
-	collision_mask = Helper.ENTITIES | Helper.WALLS | Helper.BOXES
+	collision_layer = Helper.GOALS
+	collision_mask = Helper.ENTITIES | Helper.BOXES
 	add_child(collision)
 	_refresh_visual()
-
-
-func _physics_process(delta: float) -> void:
-	if Engine.is_editor_hint():
-		return
 
 
 func _refresh_visual() -> void:

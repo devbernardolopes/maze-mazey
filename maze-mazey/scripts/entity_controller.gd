@@ -1,18 +1,6 @@
 class_name EntityController
 extends Node
 
-
-func get_move_vector() -> Vector2:
-	return Vector2.ZERO
-
-
-func get_move_vector_h() -> Vector2:
-	return Vector2.ZERO
-
-
-func get_direction_h() -> float:
-	return 0.0
-
-
+## Discrete grid intent: one of the four cardinal directions, or Vector2.ZERO.
 func get_move_intent() -> Vector2:
-	return get_move_vector()
+	return Vector2.ZERO

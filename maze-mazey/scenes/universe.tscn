@@ -61,8 +61,16 @@ metadata/_custom_type_script = "uid://ddd03s26mmylb"
 [node name="Thief" parent="Entities" unique_id=178306753 instance=ExtResource("7_56nod")]
 position = Vector2(-224, 608)
 
+[node name="PlayerController" type="Node" parent="Entities/Thief"]
+script = ExtResource("6_qbb8e")
+metadata/_custom_type_script = "uid://ddd03s26mmylb"
+
 [node name="Wizard" parent="Entities" unique_id=652445255 instance=ExtResource("8_5fwve")]
 position = Vector2(-352, 672)
+
+[node name="PlayerController" type="Node" parent="Entities/Wizard"]
+script = ExtResource("6_qbb8e")
+metadata/_custom_type_script = "uid://ddd03s26mmylb"
 
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=948245310 node_paths=PackedStringArray("target")]
 script = ExtResource("6_jegdv")
