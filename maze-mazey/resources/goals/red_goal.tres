@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GoalData" format=3 uid="uid://bvst2rirgt2o1"]
+
+[ext_resource type="Script" uid="uid://bwdcg754f2std" path="res://resources/goal_data.gd" id="1_oexuv"]
+[ext_resource type="SpriteFrames" uid="uid://dvf3nwm1n3lkg" path="res://resources/goals/red_goal_sprite_frames.tres" id="2_7jxlr"]
+
+[resource]
+script = ExtResource("1_oexuv")
+id = &"red_goal"
+name = "Red Goal"
+visual = ExtResource("2_7jxlr")
+metadata/_custom_type_script = "uid://bwdcg754f2std"

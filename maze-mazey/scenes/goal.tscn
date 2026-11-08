@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://djssmxvu3ar4c"]
+
+[ext_resource type="Script" uid="uid://twxxte1dvq3l" path="res://scripts/goal.gd" id="1_jbojv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7uww"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3inec"]
+
+[node name="Goal" type="Area2D" unique_id=1372749654]
+script = ExtResource("1_jbojv")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1187444432]
+shape = SubResource("RectangleShape2D_m7uww")
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1743269097]
+sprite_frames = SubResource("SpriteFrames_3inec")

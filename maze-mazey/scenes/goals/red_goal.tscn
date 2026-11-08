@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://4jafssl4kpga"]
+
+[ext_resource type="Script" uid="uid://twxxte1dvq3l" path="res://scripts/goal.gd" id="1_es3ih"]
+[ext_resource type="Resource" uid="uid://bvst2rirgt2o1" path="res://resources/goals/red_goal.tres" id="2_c3agu"]
+
+[node name="RedGoal" type="Area2D" unique_id=1779852697]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_es3ih")
+data = ExtResource("2_c3agu")
+metadata/_custom_type_script = "uid://twxxte1dvq3l"

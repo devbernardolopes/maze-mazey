@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://c0e5uva4epdkw"]
 
+[ext_resource type="Script" uid="uid://cghj0ndo5jyxr" path="res://scripts/box.gd" id="1_3inec"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7uww"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7uww"]
 
 [node name="Box" type="Area2D" unique_id=2089930365]
 collision_layer = 2
 collision_mask = 11
+script = ExtResource("1_3inec")
 
-[node name="Visual" type="Sprite2D" parent="." unique_id=1895922015]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295616440]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=295616440]
 shape = SubResource("RectangleShape2D_m7uww")
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1666103830]
+sprite_frames = SubResource("SpriteFrames_m7uww")
