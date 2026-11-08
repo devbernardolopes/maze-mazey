@@ -6,6 +6,12 @@ extends Area2D
 ## clock, chaining steps without a gap while input is held, and resolves box
 ## interactions through its `Helper.ABILITY` list.
 
+## A buffered direction *change* is honoured on arrival only while it is
+## fresher than this fraction of the current step's duration. Same-direction
+## input is never latched: it is re-polled live on arrival, so a brief tap
+## (released before arrival) moves exactly one tile.
+const BUFFER_FRACTION: float = 0.5
+
 @export var data: EntityData = null:
 	set(v):
 		data = v
@@ -20,8 +26,10 @@ var is_moving: bool = false
 
 var _move_target: Vector2 = Vector2.ZERO
 var _move_speed_px: float = 0.0
-## Latest direction pressed while a step is in progress, consumed on arrival.
+## Latest direction *change* pressed while a step is in progress, consumed on
+## arrival if still fresh (see `BUFFER_FRACTION`).
 var _queued_direction: Vector2 = Vector2.ZERO
+var _queued_age_s: float = 0.0
 
 
 func _ready() -> void:
@@ -49,12 +57,21 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	if is_moving:
-		# Buffer the latest input so the next step starts on arrival, in the
-		# same tick, with no dead time between tiles.
+		# Buffer only direction *changes* (turns), with an expiry age, so the
+		# next step can start on arrival in the same tick with no dead time.
+		# Same-direction input is deliberately not latched here: it is polled
+		# live on arrival, which is what makes a brief tap a single step.
+		if _queued_direction != Vector2.ZERO:
+			_queued_age_s += delta
 		if controller != null and GameManager.is_current(self):
 			var buffered: Vector2 = controller.get_move_intent()
-			if buffered != Vector2.ZERO:
+			if buffered != Vector2.ZERO and buffered != facing:
+				if buffered != _queued_direction:
+					_queued_age_s = 0.0
 				_queued_direction = buffered
+			elif buffered == facing:
+				_queued_direction = Vector2.ZERO
+				_queued_age_s = 0.0
 		_advance(delta)
 		return
 	if controller == null:
@@ -201,13 +218,18 @@ func _advance(delta: float) -> void:
 
 func _on_arrived() -> void:
 	if controller != null and GameManager.is_current(self):
-		var intent: Vector2 = _queued_direction
-		_queued_direction = Vector2.ZERO
-		if intent == Vector2.ZERO:
+		var intent: Vector2 = Vector2.ZERO
+		var step_duration: float = 1.0 / _step_speed_tiles()
+		if _queued_direction != Vector2.ZERO and _queued_age_s <= BUFFER_FRACTION * step_duration:
+			intent = _queued_direction
+		else:
 			intent = controller.get_move_intent()
+		_queued_direction = Vector2.ZERO
+		_queued_age_s = 0.0
 		if intent != Vector2.ZERO and try_step(intent):
 			return
 	_queued_direction = Vector2.ZERO
+	_queued_age_s = 0.0
 	if visual != null:
 		visual.pause()
 
