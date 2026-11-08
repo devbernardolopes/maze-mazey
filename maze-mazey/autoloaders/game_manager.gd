@@ -59,5 +59,5 @@ func is_current(entity: Entity) -> bool:
 func _input(event: InputEvent) -> void:
 	if event.is_action("escape"):
 		get_tree().quit()
-	if event.is_action("switch"):
+	if event.is_action_pressed("switch"):
 		cycle_entities()
