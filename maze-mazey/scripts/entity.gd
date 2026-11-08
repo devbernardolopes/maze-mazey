@@ -1,9 +1,10 @@
 @tool
 class_name Entity
 extends Area2D
-## Grid-bound entity. Moves one tile at a time (see `Helper.TILE_SIZE`) with
-## a tween whose duration comes from `EntityData.move_speed` (tiles/second),
-## and resolves box interactions through its `Helper.ABILITY` list.
+## Grid-bound entity. Moves one tile at a time (see `Helper.TILE_SIZE`) at a
+## constant speed (`EntityData.move_speed`, tiles/second) on the physics
+## clock, chaining steps without a gap while input is held, and resolves box
+## interactions through its `Helper.ABILITY` list.
 
 @export var data: EntityData = null:
 	set(v):
@@ -17,7 +18,10 @@ var collision: CollisionShape2D = null
 var facing: Vector2 = Vector2.DOWN
 var is_moving: bool = false
 
-var _tween: Tween = null
+var _move_target: Vector2 = Vector2.ZERO
+var _move_speed_px: float = 0.0
+## Latest direction pressed while a step is in progress, consumed on arrival.
+var _queued_direction: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -41,10 +45,19 @@ func _exit_tree() -> void:
 		GameManager.unregister_entity(self)
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	if is_moving or controller == null:
+	if is_moving:
+		# Buffer the latest input so the next step starts on arrival, in the
+		# same tick, with no dead time between tiles.
+		if controller != null and GameManager.is_current(self):
+			var buffered: Vector2 = controller.get_move_intent()
+			if buffered != Vector2.ZERO:
+				_queued_direction = buffered
+		_advance(delta)
+		return
+	if controller == null:
 		return
 	if not GameManager.is_current(self):
 		return
@@ -94,7 +107,7 @@ func _try_push_one(box: Box, direction: Vector2) -> bool:
 	if not box.can_move(direction):
 		_set_idle_animation()
 		return false
-	box.start_move(direction, _step_duration())
+	box.start_move(direction, _step_speed_px())
 	_start_move(global_position + direction * Helper.TILE_SIZE)
 	return true
 
@@ -120,7 +133,7 @@ func _try_push_any(direction: Vector2) -> bool:
 			_set_idle_animation()
 			return false
 	for box: Box in chain:
-		box.start_move(direction, _step_duration())
+		box.start_move(direction, _step_speed_px())
 	_start_move(global_position + direction * Helper.TILE_SIZE)
 	return true
 
@@ -131,7 +144,7 @@ func _start_pull(box: Box, direction: Vector2) -> bool:
 	if box.is_moving:
 		_set_idle_animation()
 		return false
-	box.start_move(direction, _step_duration())
+	box.start_move(direction, _step_speed_px())
 	_start_move(global_position + direction * Helper.TILE_SIZE)
 	return true
 
@@ -144,12 +157,10 @@ func _start_swap(box: Box) -> bool:
 		return false
 	var box_origin: Vector2 = box.global_position
 	var entity_origin: Vector2 = global_position
-	# Keep the tile speed constant, so a distant swap takes proportionally
-	# longer than a one-tile step.
-	var tiles: float = maxf(entity_origin.distance_to(box_origin) / Helper.TILE_SIZE.x, 1.0)
-	var duration: float = tiles * _step_duration()
-	box.start_move_to(entity_origin, duration)
-	_start_move(box_origin, duration)
+	# Constant tile speed over the whole distance, so a distant swap takes
+	# proportionally longer than a one-tile step.
+	box.start_move_to(entity_origin, _step_speed_px())
+	_start_move(box_origin)
 	return true
 
 
@@ -168,24 +179,45 @@ func _find_swap_target(direction: Vector2) -> Box:
 	return null
 
 
-func _start_move(destination: Vector2, duration: float = -1.0) -> void:
+func _start_move(destination: Vector2) -> void:
 	is_moving = true
+	_move_target = destination
+	_move_speed_px = _step_speed_px()
 	_play_walk_animation()
-	_tween = create_tween()
-	_tween.tween_property(self, "global_position", destination, _step_duration() if duration < 0.0 else duration)
-	_tween.tween_callback(_on_move_finished)
 
 
-func _on_move_finished() -> void:
-	is_moving = false
-	_tween = null
+## Advances toward the target cell at constant speed; on arrival snaps exactly
+## onto the cell and immediately starts the next buffered/polled step.
+func _advance(delta: float) -> void:
+	var remaining: Vector2 = _move_target - global_position
+	var step: float = _move_speed_px * delta
+	if remaining.length() <= step:
+		global_position = _move_target
+		is_moving = false
+		_on_arrived()
+		return
+	global_position += remaining.normalized() * step
+
+
+func _on_arrived() -> void:
+	if controller != null and GameManager.is_current(self):
+		var intent: Vector2 = _queued_direction
+		_queued_direction = Vector2.ZERO
+		if intent == Vector2.ZERO:
+			intent = controller.get_move_intent()
+		if intent != Vector2.ZERO and try_step(intent):
+			return
+	_queued_direction = Vector2.ZERO
 	if visual != null:
 		visual.pause()
 
 
-func _step_duration() -> float:
-	var speed: float = data.move_speed if data != null else 3.0
-	return 1.0 / maxf(speed, 0.1)
+func _step_speed_tiles() -> float:
+	return maxf(data.move_speed if data != null else 3.0, 0.1)
+
+
+func _step_speed_px() -> float:
+	return Helper.TILE_SIZE.x * _step_speed_tiles()
 
 
 func _has_ability(ability: Helper.ABILITY) -> bool:
@@ -208,8 +240,12 @@ func _play_walk_animation() -> void:
 	var animation: StringName = _animation_for(facing)
 	if not visual.sprite_frames.has_animation(animation):
 		return
-	# One walk cycle per step: rescale the authored 5 fps to the step rate.
-	visual.speed_scale = maxf(data.move_speed if data != null else 3.0, 0.1) / 5.0
+	# Keep the cycle running across chained steps; only (re)start it when the
+	# direction changes or the sprite was paused after coming to rest.
+	if visual.animation == animation and visual.is_playing():
+		return
+	# One walk cycle per tile: rescale the authored 5 fps to the step rate.
+	visual.speed_scale = _step_speed_tiles() / 5.0
 	visual.play(animation)
 
 

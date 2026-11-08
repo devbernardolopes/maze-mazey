@@ -11,7 +11,8 @@ var visual: AnimatedSprite2D = null
 var collision: CollisionShape2D = null
 var is_moving: bool = false
 
-var _tween: Tween = null
+var _move_target: Vector2 = Vector2.ZERO
+var _move_speed_px: float = 0.0
 
 
 func _ready() -> void:
@@ -26,6 +27,22 @@ func _ready() -> void:
 	_refresh_visual()
 
 
+func _physics_process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	if not is_moving:
+		return
+	# Same physics-clock integration as Entity, so pushed boxes stay in
+	# lockstep with the entity pushing them.
+	var remaining: Vector2 = _move_target - global_position
+	var step: float = _move_speed_px * delta
+	if remaining.length() <= step:
+		global_position = _move_target
+		is_moving = false
+		return
+	global_position += remaining.normalized() * step
+
+
 ## True when the adjacent cell in `direction` holds neither a wall, an
 ## entity nor another box (and this box is not already sliding).
 func can_move(direction: Vector2) -> bool:
@@ -35,27 +52,21 @@ func can_move(direction: Vector2) -> bool:
 	return Helper.get_grid_occupant(destination, get_rid()) == null
 
 
-## Slides exactly one tile in `direction` over `duration` seconds.
+## Slides exactly one tile in `direction` at `speed_px` pixels per second.
 ## The caller must have validated the move with `can_move` (for chains, every
 ## box in the chain must pass before any of them start).
-func start_move(direction: Vector2, duration: float) -> void:
-	start_move_to(global_position + direction * Helper.TILE_SIZE, duration)
+func start_move(direction: Vector2, speed_px: float) -> void:
+	start_move_to(global_position + direction * Helper.TILE_SIZE, speed_px)
 
 
-## Slides to an exact destination cell over `duration` seconds. Used by swaps,
-## where the box travels more than one tile.
-func start_move_to(destination: Vector2, duration: float) -> void:
+## Slides to an exact destination cell at `speed_px` pixels per second. Used
+## by swaps, where the box travels more than one tile.
+func start_move_to(destination: Vector2, speed_px: float) -> void:
 	if is_moving:
 		return
 	is_moving = true
-	_tween = create_tween()
-	_tween.tween_property(self, "global_position", destination, duration)
-	_tween.tween_callback(_on_move_finished)
-
-
-func _on_move_finished() -> void:
-	is_moving = false
-	_tween = null
+	_move_target = destination
+	_move_speed_px = speed_px
 
 
 func _refresh_visual() -> void:
