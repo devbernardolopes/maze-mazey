@@ -71,6 +71,7 @@ script = ExtResource("6_qbb8e")
 metadata/_custom_type_script = "uid://ddd03s26mmylb"
 
 [node name="PointLight2D" type="PointLight2D" parent="Entities/Warrior" unique_id=388999388]
+visible = false
 shadow_enabled = true
 texture = ExtResource("8_7viwd")
 
@@ -88,13 +89,24 @@ position = Vector2(-352, 672)
 script = ExtResource("6_qbb8e")
 metadata/_custom_type_script = "uid://ddd03s26mmylb"
 
+[node name="Lighting" type="Node2D" parent="." unique_id=1822220505]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lighting" unique_id=2064608714]
+position = Vector2(-219.99998, -31.999996)
+scale = Vector2(1.1197307, 0.8782202)
+color = Color(0.5254902, 1, 1, 1)
+energy = 0.85
+shadow_enabled = true
+texture = ExtResource("8_7viwd")
+texture_scale = 4.27
+
 [node name="FollowCamera" type="Camera2D" parent="." unique_id=948245310 node_paths=PackedStringArray("target")]
 script = ExtResource("6_jegdv")
 target = NodePath("../Entities/Warrior")
 metadata/_custom_type_script = "uid://c540ipvnpy5ky"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=1623358429]
-color = Color(0.35906908, 0.35906908, 0.35906908, 1)
+color = Color(0.5931336, 0.59313357, 0.59313357, 1)
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=2043298697]
 script = ExtResource("13_yanup")
