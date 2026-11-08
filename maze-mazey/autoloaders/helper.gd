@@ -18,7 +18,11 @@ enum ABILITY {
 	SWAP = 30,
 }
 
-const TILE_SIZE: Vector2 = Vector2(64.0, 64.0)
+const TILE_LENGTH: float = 64.0
+const TILE_HALF_LENGTH: float = TILE_LENGTH / 2.0
+const TILE_SIZE: Vector2 = Vector2.ONE * TILE_LENGTH
+## Because the default [member offset] for the AnimatedSprite2D is centered.
+const TILE_HALF_SIZE: Vector2 = TILE_SIZE / 2.0
 
 # Bit masks for the named 2D physics layers in Project Settings.
 const WALLS: int = 1

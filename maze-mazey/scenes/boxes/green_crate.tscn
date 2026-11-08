@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c514tsxkeuxor"]
+
+[ext_resource type="Script" uid="uid://cghj0ndo5jyxr" path="res://scripts/box.gd" id="1_pgxkk"]
+[ext_resource type="Resource" uid="uid://cc3bk8wa6aeh8" path="res://resources/boxes/green_crate.tres" id="2_pu6fw"]
+
+[node name="GreenCrate" type="Area2D" unique_id=512959586]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_pgxkk")
+data = ExtResource("2_pu6fw")
+metadata/_custom_type_script = "uid://cghj0ndo5jyxr"

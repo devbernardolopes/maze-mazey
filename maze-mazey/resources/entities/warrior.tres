@@ -7,6 +7,7 @@
 script = ExtResource("1_lgbq6")
 id = &"warrior"
 name = "Warrior"
+color = Color(1, 0, 0, 1)
 move_speed = 10.0
 visual = ExtResource("2_0ehae")
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

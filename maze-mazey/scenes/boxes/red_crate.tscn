@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cghj0ndo5jyxr" path="res://scripts/box.gd" id="1_5wfn6"]
 [ext_resource type="Resource" uid="uid://00dtcgiro8kb" path="res://resources/boxes/red_crate.tres" id="2_0o8ku"]
 
-[node name="RedCrate" type="Area2D" unique_id=463306891]
+[node name="RedCrate" type="Area2D" unique_id=1009570044]
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_5wfn6")

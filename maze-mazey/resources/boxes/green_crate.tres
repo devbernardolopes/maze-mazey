@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="BoxData" format=3 uid="uid://cc3bk8wa6aeh8"]
+
+[ext_resource type="Script" uid="uid://bwdcg754f2std" path="res://resources/goal_data.gd" id="1_picn7"]
+[ext_resource type="Resource" uid="uid://bvst2rirgt2o1" path="res://resources/goals/red_goal.tres" id="2_gv5lr"]
+[ext_resource type="Script" uid="uid://bns6xbrm1hpdp" path="res://resources/box_data.gd" id="3_w1p60"]
+[ext_resource type="SpriteFrames" uid="uid://cyxa8qyygaw0w" path="res://resources/boxes/green_crate_sprite_frames.tres" id="4_picn7"]
+
+[resource]
+script = ExtResource("3_w1p60")
+id = &"green_crate"
+name = "Green Crate"
+visual = ExtResource("4_picn7")
+goals = Array[ExtResource("1_picn7")]([ExtResource("2_gv5lr")])
+metadata/_custom_type_script = "uid://bns6xbrm1hpdp"
