@@ -1,10 +1,11 @@
 extends Node
 
 ## Sokoban abilities (extended).
-## Defines how an entity interacts with in-game objects that have the  
+## Defines how an entity interacts with in-game objects that are in the BOXES physics layer
 enum ABILITY {
-	
+	## The entity can push one of this object in the direction it is moving if the object has
 	PUSH_ONE = 10,
+	## The entity can push more than one of this object in the direction it is moving
 	PUSH_ANY = 11,
 	PULL_ONE = 20,
 	PULL_ANY = 21,

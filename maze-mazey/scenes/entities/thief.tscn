@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cil8i7gt0rxvk"]
+
+[ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_ykp6f"]
+[ext_resource type="Resource" uid="uid://cqfdmyqsg7r4o" path="res://resources/entities/thief.tres" id="2_w48eh"]
+
+[node name="Thief" type="Area2D" unique_id=178306753]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_ykp6f")
+data = ExtResource("2_w48eh")
+metadata/_custom_type_script = "uid://dcfticnsdh87j"

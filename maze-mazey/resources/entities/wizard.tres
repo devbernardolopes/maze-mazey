@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://c3p3o8hx1xpv7"]
+
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_6lp1k"]
+[ext_resource type="SpriteFrames" uid="uid://c338jm055e5nb" path="res://resources/entities/wizard_sprite_frames.tres" id="2_f7cxu"]
+
+[resource]
+script = ExtResource("1_6lp1k")
+color = Color(1, 0, 1, 1)
+abilities = Array[int]([30])
+visual = ExtResource("2_f7cxu")
+metadata/_custom_type_script = "uid://b0tku1heg8hme"
