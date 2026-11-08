@@ -4,6 +4,9 @@
 [ext_resource type="TileSet" uid="uid://biyx5wfpk8c4k" path="res://resources/tilesets/terrains_tileset.tres" id="2_xq63u"]
 [ext_resource type="TileSet" uid="uid://dlyor0qx310nu" path="res://resources/tilesets/decals_tileset.tres" id="3_uc3kj"]
 [ext_resource type="TileSet" uid="uid://ckatcmpujyxhh" path="res://resources/tilesets/obstacles_tileset.tres" id="4_jegdv"]
+[ext_resource type="PackedScene" uid="uid://dtod6lbtobbc5" path="res://scenes/entities/warrior.tscn" id="5_uc3kj"]
+[ext_resource type="Script" uid="uid://c540ipvnpy5ky" path="res://scripts/follow_camera.gd" id="6_jegdv"]
+[ext_resource type="Script" uid="uid://ddd03s26mmylb" path="res://scripts/player_controller.gd" id="6_qbb8e"]
 
 [node name="Universe" type="Node2D" unique_id=344054082]
 script = ExtResource("1_pol6k")
@@ -21,3 +24,16 @@ tile_map_data = PackedByteArray("AADt/x0AAQAHAAcAAADu/x0AAQAHAAcAAADv/x0AAQAHAAc
 tile_set = ExtResource("4_jegdv")
 
 [node name="Entities" type="Node2D" parent="." unique_id=2052049750]
+
+[node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
+position = Vector2(-480, 608)
+
+[node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
+script = ExtResource("6_qbb8e")
+metadata/_custom_type_script = "uid://ddd03s26mmylb"
+
+[node name="FollowCamera" type="Camera2D" parent="." unique_id=948245310 node_paths=PackedStringArray("target")]
+script = ExtResource("6_jegdv")
+target = NodePath("../Entities/Warrior")
+mode = 0
+metadata/_custom_type_script = "uid://c540ipvnpy5ky"

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dtod6lbtobbc5"]
+
+[ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_wjpho"]
+[ext_resource type="Resource" uid="uid://brbqnoqmagwwi" path="res://resources/entities/warrior.tres" id="2_05nkx"]
+
+[node name="Warrior" type="Area2D" unique_id=381364121]
+script = ExtResource("1_wjpho")
+data = ExtResource("2_05nkx")
+metadata/_custom_type_script = "uid://dcfticnsdh87j"
