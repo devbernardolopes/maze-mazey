@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://brbqnoqmagwwi"]
+
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
+[ext_resource type="SpriteFrames" uid="uid://5u5j00k5ctoy" path="res://resources/entities/warrior_sprite_frames.tres" id="2_0ehae"]
+
+[resource]
+script = ExtResource("1_lgbq6")
+id = &"warrior"
+name = "Warrior"
+color = Color(1, 0, 0, 1)
+visual = ExtResource("2_0ehae")
+metadata/_custom_type_script = "uid://b0tku1heg8hme"

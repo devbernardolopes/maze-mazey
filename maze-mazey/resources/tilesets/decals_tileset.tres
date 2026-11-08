@@ -1,0 +1,27 @@
+[gd_resource type="TileSet" format=3 uid="uid://dlyor0qx310nu"]
+
+[ext_resource type="Texture2D" uid="uid://b32kiegllbnun" path="res://assets/images/sokoban_tilesheet.png" id="1_bffri"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mva35"]
+texture = ExtResource("1_bffri")
+texture_region_size = Vector2i(64, 64)
+11:5/0 = 0
+11:4/0 = 0
+11:3/0 = 0
+11:2/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+12:2/0 = 0
+12:3/0 = 0
+12:4/0 = 0
+12:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 11
+physics_layer_1/collision_layer = 2
+physics_layer_1/collision_mask = 11
+sources/1 = SubResource("TileSetAtlasSource_mva35")

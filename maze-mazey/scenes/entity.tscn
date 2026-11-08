@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c7tei4k20amqj"]
+
+[ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_iiwub"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7uww"]
+
+[node name="Entity" type="Area2D" unique_id=2038876384]
+script = ExtResource("1_iiwub")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=746490992]
+shape = SubResource("RectangleShape2D_m7uww")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1560782632]
