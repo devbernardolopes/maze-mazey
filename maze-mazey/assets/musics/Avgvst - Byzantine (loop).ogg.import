@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d7do8p5v2kss"
+path="res://.godot/imported/Avgvst - Byzantine (loop).ogg-b9525490061c74837681dcc8eea15186.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/musics/Avgvst - Byzantine (loop).ogg"
+dest_files=["res://.godot/imported/Avgvst - Byzantine (loop).ogg-b9525490061c74837681dcc8eea15186.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

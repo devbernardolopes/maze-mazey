@@ -3,9 +3,16 @@
 [ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_87lab"]
 [ext_resource type="Resource" uid="uid://c3p3o8hx1xpv7" path="res://resources/entities/wizard.tres" id="2_2o48y"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2o48y"]
+cull_mode = 2
+polygon = PackedVector2Array(-16, 8, -16, 24, -8, 24, 0, 16, 8, 24, 16, 24, 16, 8, 16, 0, 8, -8, -8, -8, -16, 0)
+
 [node name="Wizard" type="Area2D" unique_id=652445255]
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_87lab")
 data = ExtResource("2_2o48y")
 metadata/_custom_type_script = "uid://dcfticnsdh87j"
+
+[node name="Occluder" type="LightOccluder2D" parent="." unique_id=210984361]
+occluder = SubResource("OccluderPolygon2D_2o48y")

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://7ooe0ykorl2d"]
+
+[ext_resource type="Script" uid="uid://bm5c6uttwot7p" path="res://scripts/hud/slot.gd" id="1_dgu3p"]
+[ext_resource type="Texture2D" uid="uid://1lmcc5ayylec" path="res://assets/hud/playerFace.png" id="2_svkxg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7uww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_svkxg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerSlot" type="Node2D" unique_id=1545187721]
+script = ExtResource("1_dgu3p")
+metadata/_custom_type_script = "uid://bm5c6uttwot7p"
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1563049470]
+sprite_frames = SubResource("SpriteFrames_m7uww")
+centered = false

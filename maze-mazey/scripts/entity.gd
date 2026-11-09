@@ -12,6 +12,15 @@ extends Area2D
 ## (released before arrival) moves exactly one tile.
 const BUFFER_FRACTION: float = 0.5
 
+@export var playable: bool = false:
+	set(v):
+		playable = v
+		if not Engine.is_editor_hint():
+			if v:
+				GameManager.register_entity(self)
+			else:
+				GameManager.unregister_entity(self)
+
 @export var data: EntityData = null:
 	set(v):
 		data = v
@@ -58,7 +67,8 @@ func _ready() -> void:
 	if not Engine.is_editor_hint():
 		if controller == null:
 			controller = _find_controller()
-		GameManager.register_entity(self)
+		if playable:
+			GameManager.register_entity(self)
 
 
 func _exit_tree() -> void:

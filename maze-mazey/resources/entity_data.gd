@@ -8,3 +8,4 @@ extends Resource
 ## Movement speed in tiles per second. One step covers exactly one tile.
 @export var move_speed: float = 6.0
 @export var visual: SpriteFrames = null
+@export var fov_radius: int = 6

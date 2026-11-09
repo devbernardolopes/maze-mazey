@@ -29,6 +29,13 @@ const WALLS: int = 1
 const BOXES: int = 2
 const GOALS: int = 4
 const ENTITIES: int = 8
+const WORLD: int = 16
+
+const TITLE_MUSIC: AudioStream = preload("res://assets/musics/Avgvst - Byzantine (loop).ogg")
+const UNIVERSE_MUSIC: AudioStream = preload("res://assets/musics/House In a Forest Loop.ogg")
+const PLAYER_FACE_OUTLINE = preload("res://assets/hud/playerFace_outline.png")
+const SLOT_OUTLINE = preload("res://assets/hud/slot_outline.png")
+
 
 ## Returns the collider occupying the cell centred on `world_position`, or
 ## null when the cell is free. `exclude_rid` lets the caller ignore itself.
@@ -45,3 +52,16 @@ func get_grid_occupant(world_position: Vector2, exclude_rid: RID) -> Object:
 	if hits.is_empty():
 		return null
 	return hits[0].get("collider") as Object
+
+
+func get_game_size() -> Vector2:
+	#return get_viewport().get_window().size
+	# The editor viewport is not the game viewport, so read the project setting.
+	var x: float = float(ProjectSettings.get_setting(&"display/window/size/viewport_width"))
+	var y: float = float(ProjectSettings.get_setting(&"display/window/size/viewport_height"))
+	return Vector2(x, y)
+
+
+func get_game_width() -> float:
+	# The editor viewport is not the game viewport, so read the project setting.
+	return get_game_size().x
