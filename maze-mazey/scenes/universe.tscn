@@ -120,7 +120,7 @@ tile_set = ExtResource("4_jegdv")
 [node name="Entities" type="Node2D" parent="." unique_id=2052049750]
 
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
-position = Vector2(-224, -32)
+position = Vector2(-544, 608)
 playable = true
 
 [node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
@@ -134,14 +134,13 @@ texture = ExtResource("8_7viwd")
 
 [node name="Thief" parent="Entities" unique_id=178306753 instance=ExtResource("7_56nod")]
 position = Vector2(-224, 608)
-playable = true
 
 [node name="PlayerController" type="Node" parent="Entities/Thief" unique_id=949991427]
 script = ExtResource("6_qbb8e")
 metadata/_custom_type_script = "uid://ddd03s26mmylb"
 
 [node name="Wizard" parent="Entities" unique_id=652445255 instance=ExtResource("8_5fwve")]
-position = Vector2(-352, 672)
+position = Vector2(-1312, 608)
 playable = true
 
 [node name="PlayerController" type="Node" parent="Entities/Wizard" unique_id=473206820]

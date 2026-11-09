@@ -189,18 +189,23 @@ func _start_pull(box: Box, direction: Vector2) -> bool:
 	return true
 
 
-## Swaps this entity's cell with the box's cell. Steps on the way are not
-## taken, so the swap target is the nearest box with a clear line of sight.
+## Swaps this entity's cell with the box's cell. The swap is instant: both
+## teleport to the other's origin instead of sliding toward each other along
+## the path. Steps on the way are not taken, so the swap target is the nearest
+## box with a clear line of sight. Like a plain step, a swap consumes the input
+## that triggered it: no follow-up step is chained for a mere tap.
 func _start_swap(box: Box) -> bool:
 	if box.is_moving:
 		_set_idle_animation()
 		return false
 	var box_origin: Vector2 = box.global_position
-	var entity_origin: Vector2 = global_position
-	# Constant tile speed over the whole distance, so a distant swap takes
-	# proportionally longer than a one-tile step.
-	box.start_move_to(entity_origin, _step_speed_px())
-	_start_move(box_origin)
+	# Teleport both tiles at once; there is no intermediate step to advance.
+	box.teleport_to(global_position)
+	global_position = box_origin
+	is_moving = false
+	_move_target = Vector2.ZERO
+	_move_speed_px = 0.0
+	_set_idle_animation()
 	return true
 
 

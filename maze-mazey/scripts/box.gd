@@ -66,17 +66,18 @@ func can_move(direction: Vector2) -> bool:
 ## The caller must have validated the move with `can_move` (for chains, every
 ## box in the chain must pass before any of them start).
 func start_move(direction: Vector2, speed_px: float) -> void:
-	start_move_to(global_position + direction * Helper.TILE_SIZE, speed_px)
-
-
-## Slides to an exact destination cell at `speed_px` pixels per second. Used
-## by swaps, where the box travels more than one tile.
-func start_move_to(destination: Vector2, speed_px: float) -> void:
-	if is_moving:
-		return
 	is_moving = true
-	_move_target = destination
+	_move_target = global_position + direction * Helper.TILE_SIZE
 	_move_speed_px = speed_px
+
+
+## Instantly repositions the box, cancelling any pending move. Used for swaps,
+## which are a single instant teleport rather than a slide.
+func teleport_to(destination: Vector2) -> void:
+	global_position = destination
+	is_moving = false
+	_move_target = Vector2.ZERO
+	_move_speed_px = 0.0
 
 
 func _refresh_visual() -> void:

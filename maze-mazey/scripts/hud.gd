@@ -11,7 +11,7 @@ const PLAYER_SLOT = preload("res://scenes/hud/player_slot.tscn")
 var bottom_left: Vector2 = Vector2(0, Helper.get_game_size().y)
 
 func _ready() -> void:
-	print(get_viewport().get_window().size)
+	#print(get_viewport().get_window().size)
 	if not Engine.is_editor_hint():
 		if not GameManager.current_entity_changed.is_connected(_on_current_entity_changed):
 			GameManager.current_entity_changed.connect(_on_current_entity_changed)
@@ -19,8 +19,9 @@ func _ready() -> void:
 
 
 func _on_current_entity_changed(entity: Entity) -> void:
-	if entity and not entity.is_queued_for_deletion():
-		_refresh_visual()
+	if not Engine.is_editor_hint():
+		if entity and not entity.is_queued_for_deletion():
+			_refresh_visual()
 
 
 func _refresh_visual() -> void:
