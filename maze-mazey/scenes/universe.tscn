@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c1kdelr677p33" path="res://scenes/entities/wizard.tscn" id="8_5fwve"]
 [ext_resource type="Texture2D" uid="uid://b7fqci3uxhpfo" path="res://assets/images/2d_lights_and_shadows_neutral_point_light.webp" id="8_7viwd"]
 [ext_resource type="Script" uid="uid://bx1osbeis1thj" path="res://scripts/hud.gd" id="13_yanup"]
+[ext_resource type="Texture2D" uid="uid://b32kiegllbnun" path="res://assets/images/sokoban_tilesheet.png" id="14_h8wxb"]
 
 [node name="Universe" type="Node2D" unique_id=344054082]
 script = ExtResource("1_pol6k")
@@ -62,9 +63,7 @@ tile_set = ExtResource("4_jegdv")
 [node name="Entities" type="Node2D" parent="." unique_id=2052049750]
 
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
-position = Vector2(-544, 544)
-collision_layer = 8
-collision_mask = 11
+position = Vector2(-224, -32)
 
 [node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
 script = ExtResource("6_qbb8e")
@@ -92,8 +91,8 @@ metadata/_custom_type_script = "uid://ddd03s26mmylb"
 [node name="Lighting" type="Node2D" parent="." unique_id=1822220505]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lighting" unique_id=2064608714]
-position = Vector2(-219.99998, -31.999996)
-scale = Vector2(1.1197307, 0.8782202)
+position = Vector2(-223.99994, -32)
+scale = Vector2(1.1124123, 0.8782202)
 color = Color(0.5254902, 1, 1, 1)
 energy = 0.85
 shadow_enabled = true
@@ -110,3 +109,47 @@ color = Color(0.5931336, 0.59313357, 0.59313357, 1)
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=2043298697]
 script = ExtResource("13_yanup")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud" unique_id=347595463]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud/MarginContainer" unique_id=1117864872]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Control" type="Control" parent="Hud/MarginContainer/HBoxContainer" unique_id=337669133]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PlayerEntity01" type="Sprite2D" parent="Hud/MarginContainer/HBoxContainer/Control" unique_id=54164289]
+self_modulate = Color(1, 0, 0, 1)
+texture = ExtResource("14_h8wxb")
+centered = false
+region_enabled = true
+region_rect = Rect2(384, 320, 64, 64)
+
+[node name="Control2" type="Control" parent="Hud/MarginContainer/HBoxContainer" unique_id=941421141]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PlayerEntity02" type="Sprite2D" parent="Hud/MarginContainer/HBoxContainer/Control2" unique_id=1614811971]
+position = Vector2(-4, 0)
+texture = ExtResource("14_h8wxb")
+centered = false
+region_enabled = true
+region_rect = Rect2(384, 320, 64, 64)
+
+[node name="Control3" type="Control" parent="Hud/MarginContainer/HBoxContainer" unique_id=2038746063]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="PlayerEntity03" type="Sprite2D" parent="Hud/MarginContainer/HBoxContainer/Control3" unique_id=723292214]
+position = Vector2(-8, 0)
+texture = ExtResource("14_h8wxb")
+centered = false
+region_enabled = true
+region_rect = Rect2(384, 320, 64, 64)

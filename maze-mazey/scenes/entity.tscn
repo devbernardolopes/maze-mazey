@@ -6,6 +6,10 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ujsaa"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m7uww"]
+cull_mode = 2
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
 [node name="Entity" type="Area2D" unique_id=2038876384]
 collision_layer = 8
 collision_mask = 11
@@ -16,3 +20,6 @@ shape = SubResource("RectangleShape2D_m7uww")
 
 [node name="Visual" type="AnimatedSprite2D" parent="." unique_id=1560782632]
 sprite_frames = SubResource("SpriteFrames_ujsaa")
+
+[node name="Occluder" type="LightOccluder2D" parent="." unique_id=637359415]
+occluder = SubResource("OccluderPolygon2D_m7uww")

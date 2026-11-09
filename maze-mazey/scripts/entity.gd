@@ -20,6 +20,7 @@ const BUFFER_FRACTION: float = 0.5
 var controller: EntityController = null
 var visual: AnimatedSprite2D = null
 var collision: CollisionShape2D = null
+var occluder: LightOccluder2D = null
 ## Last attempted cardinal direction (kept when idle, for animation/camera).
 var facing: Vector2 = Vector2.DOWN
 var is_moving: bool = false
@@ -41,6 +42,18 @@ func _ready() -> void:
 	collision_layer = Helper.ENTITIES
 	collision_mask = Helper.ENTITIES | Helper.WALLS | Helper.BOXES
 	add_child(collision)
+	if not occluder:
+		var _occluder: LightOccluder2D = _find_occluder()
+		if not _occluder:
+			occluder = LightOccluder2D.new()
+			occluder.occluder = OccluderPolygon2D.new()
+			occluder.occluder.polygon = [ 
+					Vector2.ZERO - Helper.TILE_HALF_SIZE, 
+					Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
+					Vector2.ONE * Helper.TILE_HALF_SIZE, 
+					Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
+					]
+			add_child(occluder)
 	_refresh_visual()
 	if not Engine.is_editor_hint():
 		if controller == null:
@@ -284,6 +297,13 @@ func _find_controller() -> EntityController:
 	for child: Node in get_children():
 		if child is EntityController:
 			return child as EntityController
+	return null
+
+
+func _find_occluder() -> LightOccluder2D:
+	for child: Node in get_children():
+		if child is LightOccluder2D:
+			return child as LightOccluder2D
 	return null
 
 

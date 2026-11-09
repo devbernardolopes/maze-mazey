@@ -3,7 +3,16 @@
 [ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_wjpho"]
 [ext_resource type="Resource" uid="uid://brbqnoqmagwwi" path="res://resources/entities/warrior.tres" id="2_05nkx"]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_m7uww"]
+cull_mode = 2
+polygon = PackedVector2Array(-16, 8, -16, 24, -8, 24, 0, 16, 8, 24, 16, 24, 16, 8, 16, 0, 8, -8, -8, -8, -16, 0)
+
 [node name="Warrior" type="Area2D" unique_id=381364121]
+collision_layer = 8
+collision_mask = 11
 script = ExtResource("1_wjpho")
 data = ExtResource("2_05nkx")
 metadata/_custom_type_script = "uid://dcfticnsdh87j"
+
+[node name="Occluder" type="LightOccluder2D" parent="." unique_id=79414458]
+occluder = SubResource("OccluderPolygon2D_m7uww")

@@ -11,7 +11,6 @@ var visual: AnimatedSprite2D = null
 var collision: CollisionShape2D = null
 var occluder: LightOccluder2D = null
 var is_moving: bool = false
-
 var _move_target: Vector2 = Vector2.ZERO
 var _move_speed_px: float = 0.0
 
@@ -27,13 +26,13 @@ func _ready() -> void:
 	add_child(collision)
 	occluder = LightOccluder2D.new()
 	occluder.occluder = OccluderPolygon2D.new()
+	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 	occluder.occluder.polygon = [ 
 			Vector2.ZERO - Helper.TILE_HALF_SIZE, 
 			Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
 			Vector2.ONE * Helper.TILE_HALF_SIZE, 
 			Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
 			]
-	print(occluder.occluder.polygon)
 	add_child(occluder)
 	_refresh_visual()
 
