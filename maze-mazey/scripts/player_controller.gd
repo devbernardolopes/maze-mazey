@@ -10,3 +10,14 @@ func get_move_intent() -> Vector2:
 	if absf(input_vector.x) >= absf(input_vector.y):
 		return Vector2(signf(input_vector.x), 0.0)
 	return Vector2(0.0, signf(input_vector.y))
+
+
+## Releases a held cardinal direction so an instant action (such as a swap)
+## triggered by it does not immediately chain a follow-up step on the next
+## physics frame.
+func consume_move_intent() -> void:
+	if Input.is_action_pressed(&"left") or Input.is_action_pressed(&"right") or Input.is_action_pressed(&"up") or Input.is_action_pressed(&"down"):
+		Input.action_release(&"left")
+		Input.action_release(&"right")
+		Input.action_release(&"up")
+		Input.action_release(&"down")

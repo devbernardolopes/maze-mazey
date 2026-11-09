@@ -206,6 +206,8 @@ func _start_swap(box: Box) -> bool:
 	_move_target = Vector2.ZERO
 	_move_speed_px = 0.0
 	_set_idle_animation()
+	if controller != null:
+		controller.consume_move_intent()
 	return true
 
 

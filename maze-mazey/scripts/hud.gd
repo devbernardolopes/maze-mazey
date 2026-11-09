@@ -8,11 +8,13 @@ const PLAYER_SLOT = preload("res://scenes/hud/player_slot.tscn")
 
 @onready var player_entities_node: Node2D = $PlayerEntitiesNode
 
-var bottom_left: Vector2 = Vector2(0, Helper.get_game_size().y)
+var bottom_left: Vector2 = Vector2.ZERO
+
 
 func _ready() -> void:
 	#print(get_viewport().get_window().size)
 	if not Engine.is_editor_hint():
+		bottom_left = Vector2(0, Helper.get_game_size().y)
 		if not GameManager.current_entity_changed.is_connected(_on_current_entity_changed):
 			GameManager.current_entity_changed.connect(_on_current_entity_changed)
 		_refresh_visual()
