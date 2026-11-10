@@ -122,9 +122,8 @@ func _physics_process(delta: float) -> void:
 
 ## Reveals tiles inside this entity's sight cone that it has not seen before,
 ## and dispels the fog over them on the fog layer while it is the active player.
-## Revealed tiles are remembered per entity forever; only the currently active
-## playable entity dispels fog (non-playable entities just build their own
-## perception memory).
+## Revealed tiles are remembered per entity forever; all playable entities 
+## dispels fog (non-playable entities just build their own perception memory).
 func _update_fog_of_war() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -137,7 +136,7 @@ func _update_fog_of_war() -> void:
 		if _revealed_tiles.has(tile):
 			continue
 		_revealed_tiles[tile] = true
-		if not (playable and GameManager.is_current(self)):
+		if not playable:
 			continue
 		fog_of_war.erase_cell(tile)
 
