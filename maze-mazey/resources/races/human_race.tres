@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RaceData" format=3 uid="uid://b1g0svdcpvrou"]
 
-[ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/race_data.gd" id="1_n1bol"]
+[ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/entity_race_data.gd" id="1_n1bol"]
 
 [resource]
 script = ExtResource("1_n1bol")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4kvqe6ko1kfd"
-path="res://.godot/imported/fog_of_war_16.png-793f80d285d5c8dc25914464d876a862.ctex"
+uid="uid://bed2ik332o0f5"
+path="res://.godot/imported/fog_of_war_full_64.png-60c1f0801283b0c164820906cb911e2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/fog_of_war_16.png"
-dest_files=["res://.godot/imported/fog_of_war_16.png-793f80d285d5c8dc25914464d876a862.ctex"]
+source_file="res://assets/images/fog_of_war_full_64.png"
+dest_files=["res://.godot/imported/fog_of_war_full_64.png-60c1f0801283b0c164820906cb911e2f.ctex"]
 
 [params]
 

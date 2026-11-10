@@ -26,6 +26,7 @@ const BUFFER_FRACTION: float = 0.5
 		data = v
 		_refresh_visual()
 
+var universe_node: Node = null
 var controller: EntityController = null
 var visual: AnimatedSprite2D = null
 var collision: CollisionShape2D = null
@@ -33,15 +34,12 @@ var occluder: LightOccluder2D = null
 ## Last attempted cardinal direction (kept when idle, for animation/camera).
 var facing: Vector2 = Vector2.DOWN
 var is_moving: bool = false
-
 var _move_target: Vector2 = Vector2.ZERO
 var _move_speed_px: float = 0.0
 ## Latest direction *change* pressed while a step is in progress, consumed on
 ## arrival if still fresh (see `BUFFER_FRACTION`).
 var _queued_direction: Vector2 = Vector2.ZERO
 var _queued_age_s: float = 0.0
-
-@onready var fog_of_war: TileMapLayer = $"../../FogOfWar"
 
 
 func _ready() -> void:
@@ -68,12 +66,20 @@ func _ready() -> void:
 	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 	_refresh_visual()
 	if not Engine.is_editor_hint():
+		universe_node = _find_universe_node()
 		if not controller:
 			controller = _find_controller()
 		if playable:
 			GameManager.register_entity(self)
-		if fog_of_war:
-			fog_of_war.visible = false
+
+
+func _find_universe_node() -> Node:
+	var node: Node = get_parent()
+	var result: Node = node
+	while node and not node.name == "root":
+		result = node
+		node = node.get_parent()
+	return result
 
 
 func _exit_tree() -> void:
@@ -114,37 +120,25 @@ func _physics_process(delta: float) -> void:
 func _dispel_fog_of_war() -> void:
 	if Engine.is_editor_hint():
 		return
-	if not fog_of_war:
-		return
 	if not playable:
 		return
 	if not data:
 		return
-	var collider_point = position
-	var local_point = fog_of_war.to_local(collider_point)
-	var tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
-	fog_of_war.erase_cell(tile_coords)
-	for j in data.fov_radius:
-		tile_coords = fog_of_war.local_to_map(local_point)
-		tile_coords.y += 1
-		for i in data.fov_radius:
-			tile_coords.x -= 1
+	var fog_of_war: TileMapLayer = GameManager.fog_of_war
+	if not fog_of_war:
+		return
+	var point = position
+	var local_point = fog_of_war.to_local(point)
+	#var center_tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
+	var top_left_tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
+	top_left_tile_coords.x -= data.fov_radius
+	top_left_tile_coords.y -= data.fov_radius
+	var tile_coords: Vector2i = top_left_tile_coords
+	for row in (data.fov_radius + 1) * 2:
+		tile_coords.x = top_left_tile_coords.x + row
+		for col in (data.fov_radius + 1) * 2:
+			tile_coords.y = top_left_tile_coords.y + col
 			fog_of_war.erase_cell(tile_coords)
-	#for j in range(data.fov_radius):
-		#for i in data.fov_radius:
-			#tile_coords = fog_of_war.local_to_map(local_point)
-			#tile_coords.x += i
-			#fog_of_war.erase_cell(tile_coords)
-	#for j in range(data.fov_radius):
-		#for i in data.fov_radius:
-			#tile_coords = fog_of_war.local_to_map(local_point)
-			#tile_coords.y -= i
-			#fog_of_war.erase_cell(tile_coords)
-	#for j in range(data.fov_radius):
-		#for i in data.fov_radius:
-			#tile_coords = fog_of_war.local_to_map(local_point)
-			#tile_coords.y += i
-			#fog_of_war.erase_cell(tile_coords)
 
 
 ## Attempts one grid step in `direction`. Returns true when a move started.

@@ -4,10 +4,11 @@ extends Resource
 @export_category("ID")
 @export var id: StringName = &""
 @export var name: String = ""
+@export var entity_race: EntityRaceData = null
+@export var entity_class: EntityClassData = null
 @export_category("Visual")
 @export var visual: SpriteFrames = null
 @export var color: Color = Color.WHITE
-@export var race: RaceData = null
 @export var abilities: Array[Helper.ABILITY] = [ Helper.ABILITY.PUSH_ONE ]
 ## Movement speed in tiles per second. One step covers exactly one tile.
 @export var move_speed: float = 6.0

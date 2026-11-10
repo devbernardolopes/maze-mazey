@@ -1,0 +1,38 @@
+[gd_resource type="TileSet" format=3 uid="uid://cm8m570otw0en"]
+
+[ext_resource type="Texture2D" uid="uid://bw4d054vrxmhd" path="res://assets/images/tilesets/terrain.png" id="1_bffri"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rajnr"]
+resource_name = "decals"
+texture = ExtResource("1_bffri")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+11:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+18:5/0 = 0
+19:5/0 = 0
+17:6/0 = 0
+18:6/0 = 0
+19:6/0 = 0
+20:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+56:7/0 = 0
+57:7/0 = 0
+58:7/0 = 0
+59:7/0 = 0
+60:7/0 = 0
+61:7/0 = 0
+62:7/0 = 0
+63:7/0 = 0
+21:6/0 = 0
+
+[resource]
+tile_size = Vector2i(64, 64)
+sources/1 = SubResource("TileSetAtlasSource_rajnr")

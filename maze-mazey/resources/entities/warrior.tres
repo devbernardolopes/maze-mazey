@@ -1,14 +1,18 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://brbqnoqmagwwi"]
 
+[ext_resource type="Resource" uid="uid://ddbus3jpbu7x0" path="res://resources/classes/barbarian.tres" id="1_7e1lc"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
 [ext_resource type="SpriteFrames" uid="uid://5u5j00k5ctoy" path="res://resources/entities/warrior_sprite_frames.tres" id="2_0ehae"]
+[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/human_race.tres" id="2_spnha"]
 
 [resource]
 script = ExtResource("1_lgbq6")
 id = &"warrior"
 name = "Warrior"
+entity_race = ExtResource("2_spnha")
+entity_class = ExtResource("1_7e1lc")
+visual = ExtResource("2_0ehae")
 color = Color(1, 0, 0, 1)
 move_speed = 10.0
-visual = ExtResource("2_0ehae")
-fov_radius = 3
+fov_radius = 4
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

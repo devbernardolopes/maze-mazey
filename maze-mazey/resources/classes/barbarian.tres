@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ClassData" format=3 uid="uid://ddbus3jpbu7x0"]
+
+[ext_resource type="Script" uid="uid://ro6egvhcfva6" path="res://resources/entity_class_data.gd" id="1_88nau"]
+
+[resource]
+script = ExtResource("1_88nau")
+id = &"barbarian"
+name = "Barbarian"
+metadata/_custom_type_script = "uid://ro6egvhcfva6"

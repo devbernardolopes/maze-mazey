@@ -8,8 +8,14 @@ signal current_entity_changed(entity: Entity)
 
 var current_player_entity: Entity = null
 var player_entities: Array[Entity] = []
-
 var _current_index: int = -1
+var fog_of_war: TileMapLayer = null
+
+
+func register_fog_of_war(node: TileMapLayer) -> void:
+	if not node or not node is TileMapLayer:
+		return
+	fog_of_war = node
 
 
 func register_entity(entity: Entity) -> void:
