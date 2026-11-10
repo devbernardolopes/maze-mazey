@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 	if intent != Vector2.ZERO:
 		try_step(intent)
 
-## Reveals tiles inside this entity's sight cone that it has not seen before,
+## Reveals tiles inside this entity's field of view that it has not seen before,
 ## and dispels the fog over them on the fog layer while it is the active player.
 ## Revealed tiles are remembered per entity forever; only the currently active
 ## playable entity dispels fog (non-playable entities just build perception).
@@ -167,30 +167,69 @@ func _has_line_of_sight(delta: Vector2) -> bool:
 	return hit_distance >= near_edge
 
 
-## Tiles inside this entity's sight cone that it has not revealed yet. The cone
-## starts on the entity, grows to `fov_length` tiles in the direction of
-## `facing`, and spans `fov_angle` degrees (full width) around that direction,
-## and is blocked by walls. The entity's own tile is always part of the cone.
+## Tiles inside this entity's field of view that it has not revealed yet. The
+## field of view is the sector of circle configured by `data.fov` (see
+## [FovData]): it starts on the entity, grows to `fov_size` tiles in the
+## direction of `facing`, and spans `fov_angle` degrees (full width) around that
+## direction, and is blocked by walls. The entity's own tile is always part of the
+## field of view.
 func _get_fog_reveal_tiles(fog_of_war: TileMapLayer) -> Array[Vector2i]:
 	var tiles: Array[Vector2i] = []
 	if data == null:
 		return tiles
-	var fov_length: float = data.fov_length
-	var tan_half_angle: float = tan(data.fov_angle * PI / 360.0)
-	var reach: int = int(roundf(fov_length))
+	var fov_data: FovData = data.fov
+	if fov_data == null:
+		fov_data = FovData.new()
+	var reach: int = int(roundf(fov_data.fov_size))
 	var origin_tile: Vector2i = fog_of_war.local_to_map(fog_of_war.to_local(global_position))
 	for x in range(int(origin_tile.x) - reach, int(origin_tile.x) + reach + 1):
 		for y in range(int(origin_tile.y) - reach, int(origin_tile.y) + reach + 1):
 			var delta: Vector2 = Vector2(float(x - origin_tile.x), float(y - origin_tile.y))
-			var forward: float = delta.dot(facing)
-			if forward < 0.0 or forward > fov_length:
-				continue
-			if absf(delta.cross(facing)) > forward * tan_half_angle:
+			if not _is_tile_in_fov(delta, fov_data):
 				continue
 			if not _has_line_of_sight(delta):
 				continue
 			tiles.append(Vector2i(x, y))
 	return tiles
+
+
+## Whether the tile offset `delta` (in tiles away from this entity's tile) is
+## inside the field of view: a sector of circle narrowed by the full width
+## `fov_angle` around the `facing` and reaching up to the sight length
+## `fov_size`, or the literal polygon shape `fov_shape` when one is set.
+func _is_tile_in_fov(delta: Vector2, fov_data: FovData) -> bool:
+	var shape: Shape2D = fov_data.fov_shape
+	if shape is CircleShape2D or shape == null:
+		var forward: float = delta.dot(facing)
+		# Behind the entity or past the end of the sight.
+		if forward < 0.0 or forward > fov_data.fov_size:
+			return false
+		# Sector half angle: half of the full width, in radians.
+		var half_angle: float = deg_to_rad(fov_data.fov_angle) * 0.5
+		var cos_half_angle: float = cos(half_angle)
+		var cos_angle: float = 1.0
+		if delta.length() > 0.0:
+			cos_angle = delta.dot(facing) / (delta.length() * facing.length())
+		return cos_angle >= cos_half_angle
+	if shape is ConvexPolygonShape2D:
+		return _is_point_in_polygon(delta, (shape as ConvexPolygonShape2D).get_points())
+	if shape is ConcavePolygonShape2D:
+		var segments: PackedVector2Array = (shape as ConcavePolygonShape2D).get_segments()
+		var polygon: PackedVector2Array = PackedVector2Array()
+		for i in range(0, segments.size(), 2):
+			polygon.append(segments[i])
+		return _is_point_in_polygon(delta, polygon)
+	return false
+
+
+## Whether the tile offset `delta` lies inside the polygon the field of view
+## shape describes, rotated to face `facing` from this entity's position.
+func _is_point_in_polygon(delta: Vector2, polygon: PackedVector2Array) -> bool:
+	var shape_transform := Transform2D(facing.angle(), global_position)
+	var world_polygon := PackedVector2Array()
+	for i in polygon.size():
+		world_polygon.append(shape_transform * polygon[i])
+	return Geometry2D.is_point_in_polygon(delta * Helper.TILE_SIZE, world_polygon)
 
 
 ## Attempts one grid step in `direction`. Returns true when a move started.

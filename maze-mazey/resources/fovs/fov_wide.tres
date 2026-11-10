@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FovData" format=3]
+
+[ext_resource type="Script" path="res://resources/fov_data.gd" id="1_aymn2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eqqbw"]
+radius = 384.0
+
+[resource]
+script = ExtResource("1_aymn2")
+fov_shape = SubResource("CircleShape2D_eqqbw")
+fov_angle = 180.0

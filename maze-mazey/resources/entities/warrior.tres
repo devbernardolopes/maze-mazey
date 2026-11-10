@@ -3,6 +3,7 @@
 [ext_resource type="Resource" uid="uid://ddbus3jpbu7x0" path="res://resources/classes/barbarian.tres" id="1_7e1lc"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_7e1lc"]
+[ext_resource type="Resource" path="res://resources/fovs/fov_wide.tres" id="5_fovw"]
 [ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_7e1lc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spnha"]
@@ -25,7 +26,7 @@ script = ExtResource("1_lgbq6")
 entity_race = ExtResource("2_7e1lc")
 entity_class = ExtResource("1_7e1lc")
 move_speed = 10.0
-fov_angle = 180.0
+fov = ExtResource("5_fovw")
 id = &"warrior"
 name = "Warrior"
 visual = SubResource("SpriteFrames_jbojv")
