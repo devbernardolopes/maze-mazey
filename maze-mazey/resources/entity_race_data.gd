@@ -1,6 +1,7 @@
 class_name EntityRaceData
 extends Resource
 
+@export_category("ID")
 @export var id: StringName = &""
 @export var name: String = ""
 @export var description: String = ""
@@ -13,3 +14,6 @@ extends Resource
 @export var intelligence: int = 0
 @export var wisdom: int = 0
 @export var charisma: int = 0
+@export_category("Social")
+@export var enemy_races: Array[EntityRaceData] = []
+@export var enemy_entities: Array[EntityData] = []

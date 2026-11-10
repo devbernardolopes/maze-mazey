@@ -26,6 +26,19 @@ const BUFFER_FRACTION: float = 0.5
 		data = v
 		_refresh_visual()
 
+@export var level: int = 1
+## Maximum natural hit points (health) is determined by the class and the 
+## constitution. Updated every new level gained.
+@export var max_natural_hit_points: int = 1
+## Maximum total hit points (health) is the sum of 
+## [member max_natural_hit_points] and any other hit pointts modifier such as an
+## item, an active spell, a condition, and so on. It can be less or greater than
+## [member max_natural_hit_points].
+@export var max_total_hit_points: int = 1
+## Current hit points (health).
+@export var hit_points: int = 1
+@export var xp: int = 1
+
 var universe_node: Node = null
 var controller: EntityController = null
 var visual: AnimatedSprite2D = null
@@ -74,6 +87,19 @@ func _ready() -> void:
 			controller = _find_controller()
 		if playable:
 			GameManager.register_entity(self)
+	## In-game, game-related rules and stuff.
+	_init_hit_points()
+
+
+## Initialize the hit points variables considering level 1
+func _init_hit_points() -> void:
+	if data == null:
+		return
+	var base_class_hit_points: int = 0
+	if data.entity_class:
+		base_class_hit_points = data.entity_class.base_hit_points
+	max_natural_hit_points = base_class_hit_points + data.constitution
+	max_total_hit_points = max_natural_hit_points
 
 
 func _find_universe_node() -> Node:

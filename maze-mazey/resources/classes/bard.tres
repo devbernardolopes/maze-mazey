@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ClassData" format=3 uid="uid://q80khmyc3rme"]
+[gd_resource type="Resource" script_class="EntityClassData" format=3 uid="uid://q80khmyc3rme"]
 
 [ext_resource type="Script" uid="uid://ro6egvhcfva6" path="res://resources/entity_class_data.gd" id="1_rrbmb"]
 
@@ -6,4 +6,5 @@
 script = ExtResource("1_rrbmb")
 id = &"bard"
 name = "Bard"
+base_hit_points = 8
 metadata/_custom_type_script = "uid://ro6egvhcfva6"

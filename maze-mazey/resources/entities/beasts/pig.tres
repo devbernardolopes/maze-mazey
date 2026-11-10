@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bitn3hqt256iu"]
+
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_maq6l"]
+[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="1_pslgq"]
+[ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="3_pslgq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fawx4"]
+atlas = ExtResource("3_pslgq")
+region = Rect2(0, 320, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_enl8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fawx4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_maq6l")
+id = &"pig"
+name = "Pig"
+entity_race = ExtResource("1_pslgq")
+visual = SubResource("SpriteFrames_enl8a")
+metadata/_custom_type_script = "uid://b0tku1heg8hme"

@@ -6,6 +6,7 @@ extends Resource
 @export var name: String = ""
 @export var entity_race: EntityRaceData = null
 @export var entity_class: EntityClassData = null
+@export var base_xp: int = 1
 @export_category("Visual")
 @export var visual: SpriteFrames = null
 @export var color: Color = Color.WHITE

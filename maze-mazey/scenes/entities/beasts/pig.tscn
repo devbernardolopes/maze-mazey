@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dtbvylieq17oh"]
+
+[ext_resource type="Script" uid="uid://dcfticnsdh87j" path="res://scripts/entity.gd" id="1_3mt61"]
+[ext_resource type="Resource" uid="uid://bitn3hqt256iu" path="res://resources/entities/beasts/pig.tres" id="2_275d2"]
+
+[node name="Pig" type="Area2D" unique_id=863575772]
+collision_layer = 8
+collision_mask = 11
+script = ExtResource("1_3mt61")
+data = ExtResource("2_275d2")
+metadata/_custom_type_script = "uid://dcfticnsdh87j"

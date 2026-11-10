@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityRaceData" format=3 uid="uid://b1g0svdcpvrou"]
+
+[ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/entity_race_data.gd" id="1_52x2r"]
+
+[resource]
+script = ExtResource("1_52x2r")
+id = &"humanoid"
+name = "Humanoid"
+metadata/_custom_type_script = "uid://bf82hkd1fdtfk"

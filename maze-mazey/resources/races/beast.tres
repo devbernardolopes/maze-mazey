@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityRaceData" format=3 uid="uid://cov7pmppil5vv"]
+
+[ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/entity_race_data.gd" id="1_y1try"]
+
+[resource]
+script = ExtResource("1_y1try")
+id = &"beast"
+name = "Beast"
+metadata/_custom_type_script = "uid://bf82hkd1fdtfk"

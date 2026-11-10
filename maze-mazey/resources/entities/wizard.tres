@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_6lp1k"]
 [ext_resource type="Resource" uid="uid://ck5f5jskaen6d" path="res://resources/classes/wizard.tres" id="1_or8f7"]
 [ext_resource type="SpriteFrames" uid="uid://c338jm055e5nb" path="res://resources/entities/wizard_sprite_frames.tres" id="2_f7cxu"]
-[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/human_race.tres" id="2_pt5kx"]
+[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_or8f7"]
 
 [resource]
 script = ExtResource("1_6lp1k")
 id = &"wizard"
 name = "Wizard"
-entity_race = ExtResource("2_pt5kx")
+entity_race = ExtResource("2_or8f7")
 entity_class = ExtResource("1_or8f7")
 visual = ExtResource("2_f7cxu")
 color = Color(1, 0, 1, 1)

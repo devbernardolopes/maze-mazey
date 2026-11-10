@@ -3,13 +3,13 @@
 [ext_resource type="Resource" uid="uid://ddbus3jpbu7x0" path="res://resources/classes/barbarian.tres" id="1_7e1lc"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
 [ext_resource type="SpriteFrames" uid="uid://5u5j00k5ctoy" path="res://resources/entities/warrior_sprite_frames.tres" id="2_0ehae"]
-[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/human_race.tres" id="2_spnha"]
+[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_7e1lc"]
 
 [resource]
 script = ExtResource("1_lgbq6")
 id = &"warrior"
 name = "Warrior"
-entity_race = ExtResource("2_spnha")
+entity_race = ExtResource("2_7e1lc")
 entity_class = ExtResource("1_7e1lc")
 visual = ExtResource("2_0ehae")
 color = Color(1, 0, 0, 1)

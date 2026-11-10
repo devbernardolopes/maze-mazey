@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bmdhylu6u57ut"]
+
+[ext_resource type="Resource" uid="uid://ulieknaubpvj" path="res://resources/races/plant.tres" id="1_vb5rr"]
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_vwylr"]
+[ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="3_k4eg2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4yoxg"]
+atlas = ExtResource("3_k4eg2")
+region = Rect2(1536, 640, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_unov5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4yoxg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_vwylr")
+id = &"animated_tree"
+name = "Animated Tree"
+entity_race = ExtResource("1_vb5rr")
+visual = SubResource("SpriteFrames_unov5")
+metadata/_custom_type_script = "uid://b0tku1heg8hme"

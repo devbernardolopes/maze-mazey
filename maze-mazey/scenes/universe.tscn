@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c1kdelr677p33" path="res://scenes/entities/wizard.tscn" id="8_5fwve"]
 [ext_resource type="Texture2D" uid="uid://b7fqci3uxhpfo" path="res://assets/images/2d_lights_and_shadows_neutral_point_light.webp" id="8_7viwd"]
 [ext_resource type="Texture2D" uid="uid://dsd4yanhdnfg7" path="res://assets/images/fog_of_war_64.png" id="12_kk3rw"]
+[ext_resource type="PackedScene" uid="uid://dtbvylieq17oh" path="res://scenes/entities/beasts/pig.tscn" id="13_7ahc8"]
 [ext_resource type="Texture2D" uid="uid://bed2ik332o0f5" path="res://assets/images/fog_of_war_full_64.png" id="13_tqeu6"]
 [ext_resource type="Script" uid="uid://bx1osbeis1thj" path="res://scripts/hud.gd" id="13_yanup"]
 [ext_resource type="Shader" uid="uid://d1626gr5kxqib" path="res://shaders/simple_crt_vhs.gdshader" id="15_7f6e7"]
@@ -159,6 +160,14 @@ playable = true
 [node name="PlayerController" type="Node" parent="Entities/Wizard" unique_id=473206820]
 script = ExtResource("6_qbb8e")
 metadata/_custom_type_script = "uid://ddd03s26mmylb"
+
+[node name="Pig" parent="Entities" unique_id=863575772 instance=ExtResource("13_7ahc8")]
+position = Vector2(-800, 800)
+xp = null
+
+[node name="Pig2" parent="Entities" unique_id=310099199 instance=ExtResource("13_7ahc8")]
+position = Vector2(-672, 416)
+xp = null
 
 [node name="Lighting" type="Node2D" parent="." unique_id=1822220505]
 

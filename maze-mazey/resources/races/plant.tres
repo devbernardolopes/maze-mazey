@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EntityRaceData" format=3 uid="uid://ulieknaubpvj"]
+
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_rg3pr"]
+[ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/entity_race_data.gd" id="2_apaxa"]
+
+[resource]
+script = ExtResource("2_apaxa")
+id = &"plant"
+name = "Plant"
+metadata/_custom_type_script = "uid://bf82hkd1fdtfk"

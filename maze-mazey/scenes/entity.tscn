@@ -22,4 +22,5 @@ shape = SubResource("RectangleShape2D_m7uww")
 sprite_frames = SubResource("SpriteFrames_ujsaa")
 
 [node name="Occluder" type="LightOccluder2D" parent="." unique_id=637359415]
+show_behind_parent = true
 occluder = SubResource("OccluderPolygon2D_m7uww")

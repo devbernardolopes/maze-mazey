@@ -2,14 +2,14 @@
 
 [ext_resource type="Resource" uid="uid://78hpbawhcfad" path="res://resources/classes/rogue.tres" id="1_cinda"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_elj7j"]
+[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_cinda"]
 [ext_resource type="SpriteFrames" uid="uid://4h6hfidfk6gx" path="res://resources/entities/thief_sprite_frames.tres" id="2_hisk0"]
-[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/human_race.tres" id="2_sjof6"]
 
 [resource]
 script = ExtResource("1_elj7j")
 id = &"thief"
 name = "Thief"
-entity_race = ExtResource("2_sjof6")
+entity_race = ExtResource("2_cinda")
 entity_class = ExtResource("1_cinda")
 visual = ExtResource("2_hisk0")
 color = Color(0, 1, 0, 1)
