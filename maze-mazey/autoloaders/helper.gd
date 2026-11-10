@@ -18,6 +18,18 @@ enum ABILITY {
 	SWAP = 30,
 }
 
+enum BODYPART_SIDE {
+	LEFT,
+	RIGHT,
+	CENTER,
+}
+
+enum BODYPART_POSITION {
+	FRONT,
+	BACK,
+	CENTER,
+}
+
 const TILE_LENGTH: float = 64.0
 const TILE_HALF_LENGTH: float = TILE_LENGTH / 2.0
 const TILE_SIZE: Vector2 = Vector2.ONE * TILE_LENGTH
@@ -30,6 +42,7 @@ const BOXES: int = 2
 const GOALS: int = 4
 const ENTITIES: int = 8
 const WORLD: int = 16
+const ITEMS: int = 32
 
 const TITLE_MUSIC: AudioStream = preload("res://assets/musics/Avgvst - Byzantine (loop).ogg")
 const UNIVERSE_MUSIC: AudioStream = preload("res://assets/musics/House In a Forest Loop.ogg")

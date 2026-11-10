@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://4jafssl4kpga" path="res://scenes/goals/red_goal.tscn" id="3_yb76g"]
 [ext_resource type="TileSet" uid="uid://ckatcmpujyxhh" path="res://resources/tilesets/walls_tileset.tres" id="4_jegdv"]
 [ext_resource type="PackedScene" uid="uid://c514tsxkeuxor" path="res://scenes/boxes/green_crate.tscn" id="5_3yicu"]
+[ext_resource type="PackedScene" uid="uid://cnysehmb2mxn5" path="res://scenes/items/one_coin.tscn" id="5_4yhaq"]
 [ext_resource type="PackedScene" uid="uid://dtod6lbtobbc5" path="res://scenes/entities/warrior.tscn" id="5_uc3kj"]
 [ext_resource type="Script" uid="uid://c540ipvnpy5ky" path="res://scripts/follow_camera.gd" id="6_jegdv"]
 [ext_resource type="Script" uid="uid://ddd03s26mmylb" path="res://scripts/player_controller.gd" id="6_qbb8e"]
@@ -109,6 +110,11 @@ position = Vector2(-224, -224)
 collision_layer = 4
 collision_mask = 10
 
+[node name="Items" type="Node2D" parent="." unique_id=671269663]
+
+[node name="Item" parent="Items" unique_id=533866161 instance=ExtResource("5_4yhaq")]
+position = Vector2(-864, 671)
+
 [node name="Boxes" type="Node2D" parent="." unique_id=1603534891]
 
 [node name="RedCrate" parent="Boxes" unique_id=463306891 instance=ExtResource("3_5fwve")]
@@ -135,6 +141,8 @@ tile_set = ExtResource("4_jegdv")
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
 position = Vector2(-800, 608)
 playable = true
+max_natural_hit_points = 22
+max_total_hit_points = 22
 
 [node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
 script = ExtResource("6_qbb8e")
@@ -148,6 +156,8 @@ texture = ExtResource("8_7viwd")
 [node name="Thief" parent="Entities" unique_id=178306753 instance=ExtResource("7_56nod")]
 position = Vector2(-672, 608)
 playable = true
+max_natural_hit_points = 18
+max_total_hit_points = 18
 
 [node name="PlayerController" type="Node" parent="Entities/Thief" unique_id=949991427]
 script = ExtResource("6_qbb8e")
@@ -156,6 +166,8 @@ metadata/_custom_type_script = "uid://ddd03s26mmylb"
 [node name="Wizard" parent="Entities" unique_id=652445255 instance=ExtResource("8_5fwve")]
 position = Vector2(-736, 608)
 playable = true
+max_natural_hit_points = 16
+max_total_hit_points = 16
 
 [node name="PlayerController" type="Node" parent="Entities/Wizard" unique_id=473206820]
 script = ExtResource("6_qbb8e")
@@ -163,11 +175,9 @@ metadata/_custom_type_script = "uid://ddd03s26mmylb"
 
 [node name="Pig" parent="Entities" unique_id=863575772 instance=ExtResource("13_7ahc8")]
 position = Vector2(-800, 800)
-xp = null
 
 [node name="Pig2" parent="Entities" unique_id=310099199 instance=ExtResource("13_7ahc8")]
 position = Vector2(-672, 416)
-xp = null
 
 [node name="Lighting" type="Node2D" parent="." unique_id=1822220505]
 

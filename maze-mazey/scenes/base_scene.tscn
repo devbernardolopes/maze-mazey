@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://d02kbhkkrfa0e"]
+
+[ext_resource type="Script" uid="uid://0e2kx22cvqpw" path="res://scripts/base_scene.gd" id="1_ou4n4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf1bn"]
+size = Vector2(64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_275d2"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gw6av"]
+cull_mode = 2
+polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[node name="BaseScene" type="Area2D" unique_id=864241907]
+script = ExtResource("1_ou4n4")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=257317572]
+shape = SubResource("RectangleShape2D_gf1bn")
+
+[node name="Visual" type="AnimatedSprite2D" parent="." unique_id=900603202]
+sprite_frames = SubResource("SpriteFrames_275d2")
+centered = false
+
+[node name="Occluder" type="LightOccluder2D" parent="." unique_id=104920683]
+show_behind_parent = true
+occluder = SubResource("OccluderPolygon2D_gw6av")

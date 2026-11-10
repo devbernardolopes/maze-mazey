@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dhiwpf5rg06tw"]
+
+[ext_resource type="Script" uid="uid://mjb8oubvcybi" path="res://resources/item_data.gd" id="1_14rmc"]
+[ext_resource type="Texture2D" uid="uid://b0qtc75koadrn" path="res://assets/images/tilesets/items.png" id="2_yhd3n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ae1t0"]
+atlas = ExtResource("2_yhd3n")
+region = Rect2(2624, 320, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhd3n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ae1t0")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_14rmc")
+id = &"one_coin"
+name = "Coin"
+visual = SubResource("SpriteFrames_yhd3n")
+metadata/_custom_type_script = "uid://mjb8oubvcybi"

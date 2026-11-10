@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BodypartData" format=3 uid="uid://n7djsma045us"]
+
+[ext_resource type="Script" uid="uid://ca13106r5do8v" path="res://resources/bodypart_data.gd" id="1_66v2f"]
+
+[resource]
+script = ExtResource("1_66v2f")
+id = &"hand"
+name = "Hand"
+metadata/_custom_type_script = "uid://ca13106r5do8v"
