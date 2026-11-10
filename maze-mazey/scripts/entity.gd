@@ -82,6 +82,8 @@ func _ready() -> void:
 	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 	_refresh_visual()
 	if not Engine.is_editor_hint():
+		if not GameManager.current_entity_changed.is_connected(_on_current_entity_changed):
+			GameManager.current_entity_changed.connect(_on_current_entity_changed)
 		universe_node = _find_universe_node()
 		if not controller:
 			controller = _find_controller()
@@ -159,12 +161,26 @@ func _update_fog_of_war() -> void:
 	if fog_of_war == null:
 		return
 	for tile: Vector2i in _get_fog_reveal_tiles(fog_of_war):
-		if _revealed_tiles.has(tile):
-			continue
-		_revealed_tiles[tile] = true
-		if not (playable and GameManager.is_current(self)):
-			continue
+		if not _revealed_tiles.has(tile):
+			_revealed_tiles[tile] = true
+	_erase_revealed_tiles(fog_of_war)
+
+
+## Dispel the fog over every tile this entity has revealed so far. Only the
+## currently active playable entity dispels fog.
+func _erase_revealed_tiles(fog_of_war: TileMapLayer) -> void:
+	if not (playable and GameManager.is_current(self)):
+		return
+	for tile: Vector2i in _revealed_tiles.keys():
 		fog_of_war.erase_cell(tile)
+
+
+## When this entity becomes the active player, dispel the fog over every tile
+## it has revealed but never got to dispel while it was not active.
+func _on_current_entity_changed(entity: Entity) -> void:
+	if entity != self:
+		return
+	_erase_revealed_tiles(GameManager.fog_of_war)
 
 
 ## Whether the tile `delta` tiles away from this entity is in line of sight:
