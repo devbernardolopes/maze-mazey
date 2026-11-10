@@ -196,7 +196,8 @@ func _get_fog_reveal_tiles(fog_of_war: TileMapLayer) -> Array[Vector2i]:
 ## Whether the tile offset `delta` (in tiles away from this entity's tile) is
 ## inside the field of view: a sector of circle narrowed by the full width
 ## `fov_angle` around the `facing` and reaching up to the sight length
-## `fov_size`, or the literal polygon shape `fov_shape` when one is set.
+## `fov_size`, a rectangle of size `fov_size` x `fov_size` centered on the
+## entity, or the literal polygon shape `fov_shape` when one is set.
 func _is_tile_in_fov(delta: Vector2, fov_data: FovData) -> bool:
 	var shape: Shape2D = fov_data.fov_shape
 	if shape is CircleShape2D or shape == null:
@@ -211,6 +212,13 @@ func _is_tile_in_fov(delta: Vector2, fov_data: FovData) -> bool:
 		if delta.length() > 0.0:
 			cos_angle = delta.dot(facing) / (delta.length() * facing.length())
 		return cos_angle >= cos_half_angle
+	if shape is RectangleShape2D:
+		# Rectangular shape: `fov_size` is the size of the square along both
+		# axes, centered on the entity, facing and behind.
+		var half_extent: float = fov_data.fov_size * 0.5
+		var square_forward: float = delta.dot(facing)
+		var square_lateral: float = delta.dot(facing.rotated(90.0))
+		return absf(square_forward) <= half_extent and absf(square_lateral) <= half_extent
 	if shape is ConvexPolygonShape2D:
 		return _is_point_in_polygon(delta, (shape as ConvexPolygonShape2D).get_points())
 	if shape is ConcavePolygonShape2D:
@@ -225,7 +233,7 @@ func _is_tile_in_fov(delta: Vector2, fov_data: FovData) -> bool:
 ## Whether the tile offset `delta` lies inside the polygon the field of view
 ## shape describes, rotated to face `facing` from this entity's position.
 func _is_point_in_polygon(delta: Vector2, polygon: PackedVector2Array) -> bool:
-	var shape_transform := Transform2D(facing.angle(), global_position)
+	var shape_transform := Transform2D(facing.angle(), Vector2.ZERO)
 	var world_polygon := PackedVector2Array()
 	for i in polygon.size():
 		world_polygon.append(shape_transform * polygon[i])

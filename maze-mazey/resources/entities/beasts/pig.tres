@@ -21,8 +21,8 @@ animations = [{
 
 [resource]
 script = ExtResource("1_maq6l")
+entity_race = ExtResource("1_pslgq")
 id = &"pig"
 name = "Pig"
-entity_race = ExtResource("1_pslgq")
 visual = SubResource("SpriteFrames_enl8a")
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

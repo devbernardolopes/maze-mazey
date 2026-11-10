@@ -1,9 +1,8 @@
-[gd_resource type="Resource" script_class="FovData" format=3]
+[gd_resource type="Resource" script_class="FovData" format=3 uid="uid://d2713yk8eowbo"]
 
-[ext_resource type="Script" path="res://resources/fov_data.gd" id="1_aymn2"]
+[ext_resource type="Script" uid="uid://c24y8aiuk7ns6" path="res://resources/fov_data.gd" id="1_aymn2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eqqbw"]
-radius = 384.0
 
 [resource]
 script = ExtResource("1_aymn2")

@@ -154,7 +154,7 @@ shadow_enabled = true
 texture = ExtResource("8_7viwd")
 
 [node name="Thief" parent="Entities" unique_id=178306753 instance=ExtResource("7_56nod")]
-position = Vector2(-672, 608)
+position = Vector2(-416, 1440)
 playable = true
 max_natural_hit_points = 18
 max_total_hit_points = 18
@@ -166,8 +166,6 @@ metadata/_custom_type_script = "uid://ddd03s26mmylb"
 [node name="Wizard" parent="Entities" unique_id=652445255 instance=ExtResource("8_5fwve")]
 position = Vector2(-736, 608)
 playable = true
-max_natural_hit_points = 16
-max_total_hit_points = 16
 
 [node name="PlayerController" type="Node" parent="Entities/Wizard" unique_id=473206820]
 script = ExtResource("6_qbb8e")

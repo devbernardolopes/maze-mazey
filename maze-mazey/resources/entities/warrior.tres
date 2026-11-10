@@ -3,8 +3,8 @@
 [ext_resource type="Resource" uid="uid://ddbus3jpbu7x0" path="res://resources/classes/barbarian.tres" id="1_7e1lc"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_7e1lc"]
-[ext_resource type="Resource" path="res://resources/fovs/fov_wide.tres" id="5_fovw"]
 [ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_7e1lc"]
+[ext_resource type="Resource" uid="uid://d2713yk8eowbo" path="res://resources/fovs/fov_wide.tres" id="5_fovw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spnha"]
 atlas = ExtResource("4_7e1lc")

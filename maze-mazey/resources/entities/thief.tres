@@ -3,6 +3,7 @@
 [ext_resource type="Resource" uid="uid://78hpbawhcfad" path="res://resources/classes/rogue.tres" id="1_cinda"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_elj7j"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_cinda"]
+[ext_resource type="Resource" uid="uid://ccl2j33vkdgwx" path="res://resources/fovs/fov_square.tres" id="3_sjof6"]
 [ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_cinda"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjof6"]
@@ -25,6 +26,7 @@ script = ExtResource("1_elj7j")
 entity_race = ExtResource("2_cinda")
 entity_class = ExtResource("1_cinda")
 abilities = Array[int]([20])
+fov = ExtResource("3_sjof6")
 id = &"thief"
 name = "Thief"
 visual = SubResource("SpriteFrames_3inec")
