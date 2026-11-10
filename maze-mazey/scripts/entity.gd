@@ -41,6 +41,8 @@ var _move_speed_px: float = 0.0
 var _queued_direction: Vector2 = Vector2.ZERO
 var _queued_age_s: float = 0.0
 
+@onready var fog_of_war: TileMapLayer = $"../../FogOfWar"
+
 
 func _ready() -> void:
 	visual = AnimatedSprite2D.new()
@@ -51,24 +53,27 @@ func _ready() -> void:
 	collision_layer = Helper.ENTITIES
 	collision_mask = Helper.ENTITIES | Helper.WALLS | Helper.BOXES
 	add_child(collision)
+	occluder = _find_occluder()
 	if not occluder:
-		var _occluder: LightOccluder2D = _find_occluder()
-		if not _occluder:
-			occluder = LightOccluder2D.new()
-			occluder.occluder = OccluderPolygon2D.new()
-			occluder.occluder.polygon = [ 
-					Vector2.ZERO - Helper.TILE_HALF_SIZE, 
-					Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
-					Vector2.ONE * Helper.TILE_HALF_SIZE, 
-					Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
-					]
-			add_child(occluder)
+		occluder = LightOccluder2D.new()
+		occluder.occluder = OccluderPolygon2D.new()
+		occluder.occluder.polygon = [ 
+				Vector2.ZERO - Helper.TILE_HALF_SIZE, 
+				Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
+				Vector2.ONE * Helper.TILE_HALF_SIZE, 
+				Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
+				]
+		add_child(occluder)
+	occluder.show_behind_parent = true
+	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 	_refresh_visual()
 	if not Engine.is_editor_hint():
-		if controller == null:
+		if not controller:
 			controller = _find_controller()
 		if playable:
 			GameManager.register_entity(self)
+		if fog_of_war:
+			fog_of_war.visible = false
 
 
 func _exit_tree() -> void:
@@ -79,6 +84,7 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
+	_dispel_fog_of_war()
 	if is_moving:
 		# Buffer only direction *changes* (turns), with an expiry age, so the
 		# next step can start on arrival in the same tick with no dead time.
@@ -97,13 +103,48 @@ func _physics_process(delta: float) -> void:
 				_queued_age_s = 0.0
 		_advance(delta)
 		return
-	if controller == null:
+	if not controller:
 		return
 	if not GameManager.is_current(self):
 		return
 	var intent: Vector2 = controller.get_move_intent()
 	if intent != Vector2.ZERO:
 		try_step(intent)
+
+func _dispel_fog_of_war() -> void:
+	if Engine.is_editor_hint():
+		return
+	if not fog_of_war:
+		return
+	if not playable:
+		return
+	if not data:
+		return
+	var collider_point = position
+	var local_point = fog_of_war.to_local(collider_point)
+	var tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
+	fog_of_war.erase_cell(tile_coords)
+	for j in data.fov_radius:
+		tile_coords = fog_of_war.local_to_map(local_point)
+		tile_coords.y += 1
+		for i in data.fov_radius:
+			tile_coords.x -= 1
+			fog_of_war.erase_cell(tile_coords)
+	#for j in range(data.fov_radius):
+		#for i in data.fov_radius:
+			#tile_coords = fog_of_war.local_to_map(local_point)
+			#tile_coords.x += i
+			#fog_of_war.erase_cell(tile_coords)
+	#for j in range(data.fov_radius):
+		#for i in data.fov_radius:
+			#tile_coords = fog_of_war.local_to_map(local_point)
+			#tile_coords.y -= i
+			#fog_of_war.erase_cell(tile_coords)
+	#for j in range(data.fov_radius):
+		#for i in data.fov_radius:
+			#tile_coords = fog_of_war.local_to_map(local_point)
+			#tile_coords.y += i
+			#fog_of_war.erase_cell(tile_coords)
 
 
 ## Attempts one grid step in `direction`. Returns true when a move started.

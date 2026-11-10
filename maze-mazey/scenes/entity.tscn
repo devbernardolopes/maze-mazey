@@ -14,7 +14,6 @@ polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_iiwub")
-playable = null
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=746490992]
 shape = SubResource("RectangleShape2D_m7uww")
@@ -23,6 +22,4 @@ shape = SubResource("RectangleShape2D_m7uww")
 sprite_frames = SubResource("SpriteFrames_ujsaa")
 
 [node name="Occluder" type="LightOccluder2D" parent="." unique_id=637359415]
-z_index = -100
-y_sort_enabled = true
 occluder = SubResource("OccluderPolygon2D_m7uww")

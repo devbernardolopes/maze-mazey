@@ -24,16 +24,19 @@ func _ready() -> void:
 	collision_layer = Helper.BOXES
 	collision_mask = Helper.ENTITIES | Helper.WALLS | Helper.BOXES
 	add_child(collision)
-	occluder = LightOccluder2D.new()
-	occluder.occluder = OccluderPolygon2D.new()
+	occluder = _find_occluder()
+	if not occluder:
+		occluder = LightOccluder2D.new()
+		occluder.occluder = OccluderPolygon2D.new()
+		occluder.occluder.polygon = [ 
+				Vector2.ZERO - Helper.TILE_HALF_SIZE, 
+				Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
+				Vector2.ONE * Helper.TILE_HALF_SIZE, 
+				Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
+				]
+		add_child(occluder)
+	occluder.show_behind_parent = true
 	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
-	occluder.occluder.polygon = [ 
-			Vector2.ZERO - Helper.TILE_HALF_SIZE, 
-			Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
-			Vector2.ONE * Helper.TILE_HALF_SIZE, 
-			Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
-			]
-	add_child(occluder)
 	_refresh_visual()
 
 
@@ -78,6 +81,13 @@ func teleport_to(destination: Vector2) -> void:
 	is_moving = false
 	_move_target = Vector2.ZERO
 	_move_speed_px = 0.0
+
+
+func _find_occluder() -> LightOccluder2D:
+	for child: Node in get_children():
+		if child is LightOccluder2D:
+			return child as LightOccluder2D
+	return null
 
 
 func _refresh_visual() -> void:

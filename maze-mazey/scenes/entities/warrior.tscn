@@ -11,7 +11,6 @@ polygon = PackedVector2Array(-16, 8, -16, 24, -8, 24, 0, 16, 8, 24, 16, 24, 16, 
 collision_layer = 8
 collision_mask = 11
 script = ExtResource("1_wjpho")
-playable = null
 data = ExtResource("2_05nkx")
 metadata/_custom_type_script = "uid://dcfticnsdh87j"
 
