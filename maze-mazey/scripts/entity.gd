@@ -40,6 +40,9 @@ var _move_speed_px: float = 0.0
 ## arrival if still fresh (see `BUFFER_FRACTION`).
 var _queued_direction: Vector2 = Vector2.ZERO
 var _queued_age_s: float = 0.0
+## Fog of war: tiles this entity has already revealed. Keys are fog layer map
+## coordinates (Vector2i); erased tiles stay revealed forever.
+var _revealed_tiles: Dictionary = {}
 
 
 func _ready() -> void:
@@ -90,7 +93,7 @@ func _exit_tree() -> void:
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	_dispel_fog_of_war()
+	_update_fog_of_war()
 	if is_moving:
 		# Buffer only direction *changes* (turns), with an expiry age, so the
 		# next step can start on arrival in the same tick with no dead time.
@@ -117,28 +120,50 @@ func _physics_process(delta: float) -> void:
 	if intent != Vector2.ZERO:
 		try_step(intent)
 
-func _dispel_fog_of_war() -> void:
+## Reveals tiles inside this entity's sight cone that it has not seen before,
+## and dispels the fog over them on the fog layer while it is the active player.
+## Revealed tiles are remembered per entity forever; only the currently active
+## playable entity dispels fog (non-playable entities just build their own
+## perception memory).
+func _update_fog_of_war() -> void:
 	if Engine.is_editor_hint():
 		return
-	if not playable:
-		return
-	if not data:
+	if data == null:
 		return
 	var fog_of_war: TileMapLayer = GameManager.fog_of_war
-	if not fog_of_war:
+	if fog_of_war == null:
 		return
-	var point = position
-	var local_point = fog_of_war.to_local(point)
-	#var center_tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
-	var top_left_tile_coords: Vector2i = fog_of_war.local_to_map(local_point)
-	top_left_tile_coords.x -= data.fov_radius
-	top_left_tile_coords.y -= data.fov_radius
-	var tile_coords: Vector2i = top_left_tile_coords
-	for row in (data.fov_radius + 1) * 2:
-		tile_coords.x = top_left_tile_coords.x + row
-		for col in (data.fov_radius + 1) * 2:
-			tile_coords.y = top_left_tile_coords.y + col
-			fog_of_war.erase_cell(tile_coords)
+	for tile: Vector2i in _get_fog_reveal_tiles(fog_of_war):
+		if _revealed_tiles.has(tile):
+			continue
+		_revealed_tiles[tile] = true
+		if not (playable and GameManager.is_current(self)):
+			continue
+		fog_of_war.erase_cell(tile)
+
+
+## Tiles inside this entity's sight cone that it has not revealed yet. The cone
+## starts on the entity, grows to `fov_length` tiles in the direction of
+## `facing`, and spans `fov_angle` degrees (full width) around that direction.
+## The entity's own tile is always part of the cone.
+func _get_fog_reveal_tiles(fog_of_war: TileMapLayer) -> Array[Vector2i]:
+	var tiles: Array[Vector2i] = []
+	if data == null:
+		return tiles
+	var fov_length: float = data.fov_length
+	var tan_half_angle: float = tan(data.fov_angle * PI / 360.0)
+	var reach: int = int(roundf(fov_length))
+	var origin_tile: Vector2i = fog_of_war.local_to_map(fog_of_war.to_local(global_position))
+	for x in range(int(origin_tile.x) - reach, int(origin_tile.x) + reach + 1):
+		for y in range(int(origin_tile.y) - reach, int(origin_tile.y) + reach + 1):
+			var delta: Vector2 = Vector2(float(x - origin_tile.x), float(y - origin_tile.y))
+			var forward: float = delta.dot(facing)
+			if forward < 0.0 or forward > fov_length:
+				continue
+			if absf(delta.cross(facing)) > forward * tan_half_angle:
+				continue
+			tiles.append(Vector2i(x, y))
+	return tiles
 
 
 ## Attempts one grid step in `direction`. Returns true when a move started.

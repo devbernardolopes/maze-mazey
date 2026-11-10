@@ -12,7 +12,12 @@ extends Resource
 @export var abilities: Array[Helper.ABILITY] = [ Helper.ABILITY.PUSH_ONE ]
 ## Movement speed in tiles per second. One step covers exactly one tile.
 @export var move_speed: float = 6.0
-@export var fov_radius: int = 6
+## Sight distance in tiles: the cone starts on the entity and grows up to this
+## many tiles in the direction it faces.
+@export var fov_length: float = 6.0
+## Full width of the sight cone in degrees, centered on the direction the
+## entity faces (e.g. 60.0 = +-30 degrees around the facing).
+@export var fov_angle: float = 60.0
 @export_category("Abilities")
 ## Physical might
 @export_range(0, 30, 1) var strength: int = 10
