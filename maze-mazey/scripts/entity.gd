@@ -122,8 +122,8 @@ func _physics_process(delta: float) -> void:
 
 ## Reveals tiles inside this entity's sight cone that it has not seen before,
 ## and dispels the fog over them on the fog layer while it is the active player.
-## Revealed tiles are remembered per entity forever; all playable entities 
-## dispels fog (non-playable entities just build their own perception memory).
+## Revealed tiles are remembered per entity forever; only the currently active
+## playable entity dispels fog (non-playable entities just build perception).
 func _update_fog_of_war() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -136,15 +136,39 @@ func _update_fog_of_war() -> void:
 		if _revealed_tiles.has(tile):
 			continue
 		_revealed_tiles[tile] = true
-		if not playable:
+		if not (playable and GameManager.is_current(self)):
 			continue
 		fog_of_war.erase_cell(tile)
 
 
+## Whether the tile `delta` tiles away from this entity is in line of sight:
+## nothing standing on the `Helper.WALLS` physics layer may be between the
+## entity and the tile, so the sight cone cannot reach through walls. The tile
+## itself counts as visible when the ray reaches its near edge unobstructed, so
+## wall tiles inside the cone are revealed while anything behind them is not.
+func _has_line_of_sight(delta: Vector2) -> bool:
+	var from: Vector2 = global_position
+	var to: Vector2 = global_position + delta * Helper.TILE_SIZE
+	if to == from:
+		return true
+	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.new()
+	query.from = from
+	query.to = to
+	query.collision_mask = Helper.WALLS
+	query.exclude = [get_rid()]
+	var space_state: PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	var hit: Dictionary = space_state.intersect_ray(query)
+	if hit.is_empty():
+		return true
+	var hit_distance: float = (hit["position"] - from).length()
+	var near_edge: float = (to - from).length() - Helper.TILE_HALF_LENGTH
+	return hit_distance >= near_edge
+
+
 ## Tiles inside this entity's sight cone that it has not revealed yet. The cone
 ## starts on the entity, grows to `fov_length` tiles in the direction of
-## `facing`, and spans `fov_angle` degrees (full width) around that direction.
-## The entity's own tile is always part of the cone.
+## `facing`, and spans `fov_angle` degrees (full width) around that direction,
+## and is blocked by walls. The entity's own tile is always part of the cone.
 func _get_fog_reveal_tiles(fog_of_war: TileMapLayer) -> Array[Vector2i]:
 	var tiles: Array[Vector2i] = []
 	if data == null:
@@ -160,6 +184,8 @@ func _get_fog_reveal_tiles(fog_of_war: TileMapLayer) -> Array[Vector2i]:
 			if forward < 0.0 or forward > fov_length:
 				continue
 			if absf(delta.cross(facing)) > forward * tan_half_angle:
+				continue
+			if not _has_line_of_sight(delta):
 				continue
 			tiles.append(Vector2i(x, y))
 	return tiles

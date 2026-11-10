@@ -14,6 +14,5 @@ entity_class = ExtResource("1_7e1lc")
 visual = ExtResource("2_0ehae")
 color = Color(1, 0, 0, 1)
 move_speed = 10.0
-fov_length = 4
 fov_angle = 180.0
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

@@ -133,6 +133,7 @@ tile_set = ExtResource("4_jegdv")
 
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
 position = Vector2(-800, 608)
+playable = true
 
 [node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
 script = ExtResource("6_qbb8e")
