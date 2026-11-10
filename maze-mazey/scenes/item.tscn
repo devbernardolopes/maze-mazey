@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://soqqe3js610s"]
+
+[ext_resource type="Script" uid="uid://gs2kxwiehxp7" path="res://scripts/item.gd" id="1_4gq7n"]
+
+[node name="Item" type="Area2D" unique_id=49811675]
+script = ExtResource("1_4gq7n")
+metadata/_custom_type_script = "uid://0e2kx22cvqpw"

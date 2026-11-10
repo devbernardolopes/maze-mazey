@@ -21,8 +21,8 @@ animations = [{
 
 [resource]
 script = ExtResource("1_vwylr")
+entity_race = ExtResource("1_vb5rr")
 id = &"animated_tree"
 name = "Animated Tree"
-entity_race = ExtResource("1_vb5rr")
 visual = SubResource("SpriteFrames_unov5")
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

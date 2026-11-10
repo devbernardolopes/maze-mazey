@@ -4,4 +4,6 @@
 
 [resource]
 script = ExtResource("1_p2bxs")
+id = &"head"
+name = "Head"
 metadata/_custom_type_script = "uid://ca13106r5do8v"

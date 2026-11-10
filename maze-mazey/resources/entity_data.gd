@@ -11,7 +11,6 @@ extends BaseResource
 @export var move_speed: float = 6.0
 ## Field of view of the entity: shape, size, and angle, see `FovData`.
 @export var fov: FovData = null
-
 @export_category("Abilities")
 ## Physical might
 @export_range(0, 30, 1) var strength: int = 10

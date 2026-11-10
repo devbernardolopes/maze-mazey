@@ -1,9 +1,12 @@
 [gd_resource type="Resource" script_class="EntityRaceData" format=3 uid="uid://cov7pmppil5vv"]
 
+[ext_resource type="Resource" uid="uid://cwxd3y6rqb1ys" path="res://resources/bodies/beast.tres" id="1_aybqi"]
 [ext_resource type="Script" uid="uid://bf82hkd1fdtfk" path="res://resources/entity_race_data.gd" id="1_y1try"]
+[ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="2_ohwr8"]
 
 [resource]
 script = ExtResource("1_y1try")
+body = ExtResource("1_aybqi")
 id = &"beast"
 name = "Beast"
 metadata/_custom_type_script = "uid://bf82hkd1fdtfk"

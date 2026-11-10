@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemClassData" format=3 uid="uid://cy854yedegon8"]
+
+[ext_resource type="Script" uid="uid://c23d670sx0tlu" path="res://resources/item_class_data.gd" id="1_t4fap"]
+
+[resource]
+script = ExtResource("1_t4fap")
+id = &"armor"
+name = "Armor"
+metadata/_custom_type_script = "uid://c23d670sx0tlu"

@@ -1,6 +1,8 @@
 class_name EntityRaceData
 extends BaseResource
 
+@export_category("Body")
+@export var body: BodyData = null
 @export_category("Race Modifiers")
 @export var strength: int = 0
 @export var dexterity: int = 0

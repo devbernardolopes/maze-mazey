@@ -6,12 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://ceh2nefsttimk" path="res://scenes/boxes/red_crate.tscn" id="3_5fwve"]
 [ext_resource type="PackedScene" uid="uid://4jafssl4kpga" path="res://scenes/goals/red_goal.tscn" id="3_yb76g"]
 [ext_resource type="TileSet" uid="uid://ckatcmpujyxhh" path="res://resources/tilesets/walls_tileset.tres" id="4_jegdv"]
+[ext_resource type="PackedScene" uid="uid://soqqe3js610s" path="res://scenes/item.tscn" id="5_1dpui"]
 [ext_resource type="PackedScene" uid="uid://c514tsxkeuxor" path="res://scenes/boxes/green_crate.tscn" id="5_3yicu"]
-[ext_resource type="PackedScene" uid="uid://cnysehmb2mxn5" path="res://scenes/items/one_coin.tscn" id="5_4yhaq"]
 [ext_resource type="PackedScene" uid="uid://dtod6lbtobbc5" path="res://scenes/entities/warrior.tscn" id="5_uc3kj"]
+[ext_resource type="Resource" uid="uid://be6un5ewbxo5r" path="res://resources/items/mace.tres" id="6_5qg6o"]
 [ext_resource type="Script" uid="uid://c540ipvnpy5ky" path="res://scripts/follow_camera.gd" id="6_jegdv"]
 [ext_resource type="Script" uid="uid://ddd03s26mmylb" path="res://scripts/player_controller.gd" id="6_qbb8e"]
 [ext_resource type="PackedScene" uid="uid://cil8i7gt0rxvk" path="res://scenes/entities/thief.tscn" id="7_56nod"]
+[ext_resource type="Resource" uid="uid://dhiwpf5rg06tw" path="res://resources/items/one_coin.tres" id="7_pbo0o"]
 [ext_resource type="PackedScene" uid="uid://c1kdelr677p33" path="res://scenes/entities/wizard.tscn" id="8_5fwve"]
 [ext_resource type="Texture2D" uid="uid://b7fqci3uxhpfo" path="res://assets/images/2d_lights_and_shadows_neutral_point_light.webp" id="8_7viwd"]
 [ext_resource type="Texture2D" uid="uid://dsd4yanhdnfg7" path="res://assets/images/fog_of_war_64.png" id="12_kk3rw"]
@@ -112,8 +114,13 @@ collision_mask = 10
 
 [node name="Items" type="Node2D" parent="." unique_id=671269663]
 
-[node name="Item" parent="Items" unique_id=533866161 instance=ExtResource("5_4yhaq")]
-position = Vector2(-864, 671)
+[node name="Item2" parent="Items" unique_id=49811675 instance=ExtResource("5_1dpui")]
+position = Vector2(352, 928)
+data = ExtResource("6_5qg6o")
+
+[node name="Item3" parent="Items" unique_id=1158903433 instance=ExtResource("5_1dpui")]
+position = Vector2(416, 928)
+data = ExtResource("7_pbo0o")
 
 [node name="Boxes" type="Node2D" parent="." unique_id=1603534891]
 
@@ -139,7 +146,7 @@ tile_set = ExtResource("4_jegdv")
 [node name="Entities" type="Node2D" parent="." unique_id=2052049750]
 
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
-position = Vector2(-800, 608)
+position = Vector2(800, 864)
 playable = true
 max_natural_hit_points = 22
 max_total_hit_points = 22

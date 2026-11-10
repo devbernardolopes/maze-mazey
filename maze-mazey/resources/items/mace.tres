@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://be6un5ewbxo5r"]
+
+[ext_resource type="Script" uid="uid://mjb8oubvcybi" path="res://resources/item_data.gd" id="1_5t5m3"]
+[ext_resource type="Resource" uid="uid://b6hohcnx7ho7n" path="res://resources/item_classes/weapon.tres" id="1_kg7v8"]
+[ext_resource type="Texture2D" uid="uid://bdl2638771nw1" path="res://assets/images/tilesets/equipments.png" id="1_rcf87"]
+[ext_resource type="Texture2D" uid="uid://b0qtc75koadrn" path="res://assets/images/tilesets/items.png" id="2_4743m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wg47n"]
+atlas = ExtResource("1_rcf87")
+region = Rect2(1600, 448, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yhaq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wg47n")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg7v8"]
+atlas = ExtResource("2_4743m")
+region = Rect2(1216, 640, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4743m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg7v8")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_5t5m3")
+item_class = ExtResource("1_kg7v8")
+equipped_visual = SubResource("SpriteFrames_4yhaq")
+visual = SubResource("SpriteFrames_4743m")
+metadata/_custom_type_script = "uid://mjb8oubvcybi"

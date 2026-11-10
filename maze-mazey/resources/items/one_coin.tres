@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dhiwpf5rg06tw"]
 
 [ext_resource type="Script" uid="uid://mjb8oubvcybi" path="res://resources/item_data.gd" id="1_14rmc"]
+[ext_resource type="Resource" uid="uid://b0y7p6ngspgjc" path="res://resources/item_classes/currency.tres" id="1_ae1t0"]
 [ext_resource type="Texture2D" uid="uid://b0qtc75koadrn" path="res://assets/images/tilesets/items.png" id="2_yhd3n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ae1t0"]
@@ -20,6 +21,7 @@ animations = [{
 
 [resource]
 script = ExtResource("1_14rmc")
+item_class = ExtResource("1_ae1t0")
 id = &"one_coin"
 name = "Coin"
 visual = SubResource("SpriteFrames_yhd3n")

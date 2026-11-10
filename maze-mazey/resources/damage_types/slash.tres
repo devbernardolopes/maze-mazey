@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DamageTypeData" format=3 uid="uid://cuylsd7nnyxpf"]
+
+[ext_resource type="Script" uid="uid://b4iuojbcdmi1e" path="res://resources/damage_type_data.gd" id="1_x1rok"]
+
+[resource]
+script = ExtResource("1_x1rok")
+id = &"slash"
+name = "Slash"
+metadata/_custom_type_script = "uid://b4iuojbcdmi1e"

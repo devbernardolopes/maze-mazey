@@ -1,7 +1,8 @@
 [gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bitn3hqt256iu"]
 
+[ext_resource type="Resource" uid="uid://cov7pmppil5vv" path="res://resources/races/beast.tres" id="1_fawx4"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_maq6l"]
-[ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="1_pslgq"]
+[ext_resource type="Resource" uid="uid://d2713yk8eowbo" path="res://resources/fovs/fov_wide.tres" id="2_fawx4"]
 [ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="3_pslgq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fawx4"]
@@ -21,7 +22,8 @@ animations = [{
 
 [resource]
 script = ExtResource("1_maq6l")
-entity_race = ExtResource("1_pslgq")
+entity_race = ExtResource("1_fawx4")
+fov = ExtResource("2_fawx4")
 id = &"pig"
 name = "Pig"
 visual = SubResource("SpriteFrames_enl8a")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_6lp1k"]
 [ext_resource type="Resource" uid="uid://ck5f5jskaen6d" path="res://resources/classes/wizard.tres" id="1_or8f7"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_or8f7"]
+[ext_resource type="Resource" uid="uid://d2713yk8eowbo" path="res://resources/fovs/fov_wide.tres" id="3_pt5kx"]
 [ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_or8f7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pt5kx"]
@@ -25,6 +26,7 @@ script = ExtResource("1_6lp1k")
 entity_race = ExtResource("2_or8f7")
 entity_class = ExtResource("1_or8f7")
 abilities = Array[int]([30])
+fov = ExtResource("3_pt5kx")
 id = &"wizard"
 name = "Wizard"
 visual = SubResource("SpriteFrames_ks2v0")
