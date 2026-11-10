@@ -7,6 +7,8 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_3inec"]
 
 [node name="Goal" type="Area2D" unique_id=1372749654]
+collision_layer = 4
+collision_mask = 10
 script = ExtResource("1_jbojv")
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=1187444432]

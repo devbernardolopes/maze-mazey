@@ -3,15 +3,30 @@
 [ext_resource type="Resource" uid="uid://78hpbawhcfad" path="res://resources/classes/rogue.tres" id="1_cinda"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_elj7j"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_cinda"]
-[ext_resource type="SpriteFrames" uid="uid://4h6hfidfk6gx" path="res://resources/entities/thief_sprite_frames.tres" id="2_hisk0"]
+[ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_cinda"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjof6"]
+atlas = ExtResource("4_cinda")
+region = Rect2(0, 1152, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3inec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjof6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_elj7j")
-id = &"thief"
-name = "Thief"
 entity_race = ExtResource("2_cinda")
 entity_class = ExtResource("1_cinda")
-visual = ExtResource("2_hisk0")
-color = Color(0, 1, 0, 1)
 abilities = Array[int]([20])
+id = &"thief"
+name = "Thief"
+visual = SubResource("SpriteFrames_3inec")
+color = Color(0, 1, 0, 1)
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

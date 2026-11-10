@@ -2,16 +2,31 @@
 
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_6lp1k"]
 [ext_resource type="Resource" uid="uid://ck5f5jskaen6d" path="res://resources/classes/wizard.tres" id="1_or8f7"]
-[ext_resource type="SpriteFrames" uid="uid://c338jm055e5nb" path="res://resources/entities/wizard_sprite_frames.tres" id="2_f7cxu"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_or8f7"]
+[ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_or8f7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt5kx"]
+atlas = ExtResource("4_or8f7")
+region = Rect2(704, 1152, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ks2v0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt5kx")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_6lp1k")
-id = &"wizard"
-name = "Wizard"
 entity_race = ExtResource("2_or8f7")
 entity_class = ExtResource("1_or8f7")
-visual = ExtResource("2_f7cxu")
-color = Color(1, 0, 1, 1)
 abilities = Array[int]([30])
+id = &"wizard"
+name = "Wizard"
+visual = SubResource("SpriteFrames_ks2v0")
+color = Color(1, 0, 1, 1)
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

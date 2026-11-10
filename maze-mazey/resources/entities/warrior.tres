@@ -2,17 +2,32 @@
 
 [ext_resource type="Resource" uid="uid://ddbus3jpbu7x0" path="res://resources/classes/barbarian.tres" id="1_7e1lc"]
 [ext_resource type="Script" uid="uid://b0tku1heg8hme" path="res://resources/entity_data.gd" id="1_lgbq6"]
-[ext_resource type="SpriteFrames" uid="uid://5u5j00k5ctoy" path="res://resources/entities/warrior_sprite_frames.tres" id="2_0ehae"]
 [ext_resource type="Resource" uid="uid://b1g0svdcpvrou" path="res://resources/races/humanoid.tres" id="2_7e1lc"]
+[ext_resource type="Texture2D" uid="uid://cuis5c1mmhdr1" path="res://assets/images/tilesets/entities.png" id="4_7e1lc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spnha"]
+atlas = ExtResource("4_7e1lc")
+region = Rect2(960, 1216, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jbojv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spnha")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [resource]
 script = ExtResource("1_lgbq6")
-id = &"warrior"
-name = "Warrior"
 entity_race = ExtResource("2_7e1lc")
 entity_class = ExtResource("1_7e1lc")
-visual = ExtResource("2_0ehae")
-color = Color(1, 0, 0, 1)
 move_speed = 10.0
 fov_angle = 180.0
+id = &"warrior"
+name = "Warrior"
+visual = SubResource("SpriteFrames_jbojv")
+color = Color(1, 0, 0, 1)
 metadata/_custom_type_script = "uid://b0tku1heg8hme"

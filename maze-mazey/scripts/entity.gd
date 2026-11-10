@@ -1,6 +1,6 @@
 @tool
 class_name Entity
-extends Area2D
+extends BaseScene
 ## Grid-bound entity. Moves one tile at a time (see `Helper.TILE_SIZE`) at a
 ## constant speed (`EntityData.move_speed`, tiles/second) on the physics
 ## clock, chaining steps without a gap while input is held, and resolves box
@@ -21,11 +21,6 @@ const BUFFER_FRACTION: float = 0.5
 			else:
 				GameManager.unregister_entity(self)
 
-@export var data: EntityData = null:
-	set(v):
-		data = v
-		_refresh_visual()
-
 @export var level: int = 1
 ## Maximum natural hit points (health) is determined by the class and the 
 ## constitution. Updated every new level gained.
@@ -39,11 +34,7 @@ const BUFFER_FRACTION: float = 0.5
 @export var hit_points: int = 1
 @export var xp: int = 1
 
-var universe_node: Node = null
 var controller: EntityController = null
-var visual: AnimatedSprite2D = null
-var collision: CollisionShape2D = null
-var occluder: LightOccluder2D = null
 ## Last attempted cardinal direction (kept when idle, for animation/camera).
 var facing: Vector2 = Vector2.DOWN
 var is_moving: bool = false
@@ -59,32 +50,10 @@ var _revealed_tiles: Dictionary = {}
 
 
 func _ready() -> void:
-	visual = AnimatedSprite2D.new()
-	add_child(visual)
-	collision = CollisionShape2D.new()
-	collision.shape = RectangleShape2D.new()
-	(collision.shape as RectangleShape2D).size = Vector2.ONE * Helper.TILE_SIZE
-	collision_layer = Helper.ENTITIES
-	collision_mask = Helper.ENTITIES | Helper.WALLS | Helper.BOXES
-	add_child(collision)
-	occluder = _find_occluder()
-	if not occluder:
-		occluder = LightOccluder2D.new()
-		occluder.occluder = OccluderPolygon2D.new()
-		occluder.occluder.polygon = [ 
-				Vector2.ZERO - Helper.TILE_HALF_SIZE, 
-				Vector2(Helper.TILE_HALF_LENGTH, Helper.TILE_HALF_LENGTH * -1.0), 
-				Vector2.ONE * Helper.TILE_HALF_SIZE, 
-				Vector2(Helper.TILE_HALF_LENGTH * -1.0, Helper.TILE_HALF_LENGTH), 
-				]
-		add_child(occluder)
-	occluder.show_behind_parent = true
-	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
-	_refresh_visual()
+	super._ready()
 	if not Engine.is_editor_hint():
 		if not GameManager.current_entity_changed.is_connected(_on_current_entity_changed):
 			GameManager.current_entity_changed.connect(_on_current_entity_changed)
-		universe_node = _find_universe_node()
 		if not controller:
 			controller = _find_controller()
 		if playable:
@@ -102,15 +71,6 @@ func _init_hit_points() -> void:
 		base_class_hit_points = data.entity_class.base_hit_points
 	max_natural_hit_points = base_class_hit_points + data.constitution
 	max_total_hit_points = max_natural_hit_points
-
-
-func _find_universe_node() -> Node:
-	var node: Node = get_parent()
-	var result: Node = node
-	while node and not node.name == "root":
-		result = node
-		node = node.get_parent()
-	return result
 
 
 func _exit_tree() -> void:
@@ -442,21 +402,3 @@ func _find_controller() -> EntityController:
 		if child is EntityController:
 			return child as EntityController
 	return null
-
-
-func _find_occluder() -> LightOccluder2D:
-	for child: Node in get_children():
-		if child is LightOccluder2D:
-			return child as LightOccluder2D
-	return null
-
-
-func _refresh_visual() -> void:
-	if not data:
-		return
-	if not data.visual:
-		return
-	if not visual:
-		return
-	visual.sprite_frames = data.visual
-	visual.self_modulate = data.color

@@ -1,10 +1,6 @@
 class_name EntityRaceData
-extends Resource
+extends BaseResource
 
-@export_category("ID")
-@export var id: StringName = &""
-@export var name: String = ""
-@export var description: String = ""
 @export_category("Race Modifiers")
 @export var fov_length: float = 6.0
 @export var fov_angle: float = 60.0
