@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://dhiwpf5rg06tw" path="res://resources/items/one_coin.tres" id="7_pbo0o"]
 [ext_resource type="PackedScene" uid="uid://c1kdelr677p33" path="res://scenes/entities/wizard.tscn" id="8_5fwve"]
 [ext_resource type="Texture2D" uid="uid://b7fqci3uxhpfo" path="res://assets/images/2d_lights_and_shadows_neutral_point_light.webp" id="8_7viwd"]
+[ext_resource type="Resource" uid="uid://chla7w0atsmfy" path="res://resources/items/sword.tres" id="8_pbo0o"]
 [ext_resource type="Texture2D" uid="uid://dsd4yanhdnfg7" path="res://assets/images/fog_of_war_64.png" id="12_kk3rw"]
 [ext_resource type="PackedScene" uid="uid://dtbvylieq17oh" path="res://scenes/entities/beasts/pig.tscn" id="13_7ahc8"]
 [ext_resource type="Texture2D" uid="uid://bed2ik332o0f5" path="res://assets/images/fog_of_war_full_64.png" id="13_tqeu6"]
@@ -23,6 +24,7 @@
 [ext_resource type="Shader" uid="uid://d1626gr5kxqib" path="res://shaders/simple_crt_vhs.gdshader" id="15_7f6e7"]
 [ext_resource type="Shader" uid="uid://b8cjkjsxib6q6" path="res://shaders/lightweight_crt.gdshader" id="16_kk3rw"]
 [ext_resource type="Shader" uid="uid://cl2q4ytt753le" path="res://shaders/vhs_and_crt_monitor.gdshader" id="17_3kwp1"]
+[ext_resource type="Texture2D" uid="uid://dxcyjp13dnf0r" path="res://icon.svg" id="21_5qg6o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7ahc8"]
 texture = ExtResource("13_tqeu6")
@@ -116,11 +118,27 @@ collision_mask = 10
 
 [node name="Item2" parent="Items" unique_id=49811675 instance=ExtResource("5_1dpui")]
 position = Vector2(352, 928)
+collision_layer = 32
+collision_mask = 0
 data = ExtResource("6_5qg6o")
 
 [node name="Item3" parent="Items" unique_id=1158903433 instance=ExtResource("5_1dpui")]
 position = Vector2(416, 928)
+collision_layer = 32
+collision_mask = 0
 data = ExtResource("7_pbo0o")
+
+[node name="Item" parent="Items" unique_id=1157207364 instance=ExtResource("5_1dpui")]
+position = Vector2(608, 1056)
+collision_layer = 32
+collision_mask = 0
+data = ExtResource("8_pbo0o")
+
+[node name="Item4" parent="Items" unique_id=1986947879 instance=ExtResource("5_1dpui")]
+position = Vector2(352, 928)
+collision_layer = 32
+collision_mask = 0
+data = ExtResource("8_pbo0o")
 
 [node name="Boxes" type="Node2D" parent="." unique_id=1603534891]
 
@@ -148,8 +166,6 @@ tile_set = ExtResource("4_jegdv")
 [node name="Warrior" parent="Entities" unique_id=381364121 instance=ExtResource("5_uc3kj")]
 position = Vector2(800, 864)
 playable = true
-max_natural_hit_points = 22
-max_total_hit_points = 22
 
 [node name="PlayerController" type="Node" parent="Entities/Warrior" unique_id=624610097]
 script = ExtResource("6_qbb8e")
@@ -211,6 +227,41 @@ color = Color(0.5931336, 0.59313357, 0.59313357, 1)
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=2043298697]
 script = ExtResource("13_yanup")
+
+[node name="MarginContainer" type="MarginContainer" parent="Hud" unique_id=58491430]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Ground" type="Control" parent="Hud/MarginContainer" unique_id=1708114866]
+layout_mode = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="Hud/MarginContainer/Ground" unique_id=177458535]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Contents" type="VBoxContainer" parent="Hud/MarginContainer/Ground" unique_id=1958425553]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Item" type="HBoxContainer" parent="Hud/MarginContainer/Ground/Contents" unique_id=857837920]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Hud/MarginContainer/Ground/Contents/Item" unique_id=316875683]
+layout_mode = 2
+texture = ExtResource("21_5qg6o")
+
+[node name="Label" type="Label" parent="Hud/MarginContainer/Ground/Contents/Item" unique_id=370301636]
+layout_mode = 2
+text = "gdgfgdf gdfgdfgf"
 
 [node name="PlayerEntitiesNode" type="Node2D" parent="Hud" unique_id=1648236602]
 

@@ -12,6 +12,10 @@ var _current_index: int = -1
 var fog_of_war: TileMapLayer = null
 
 
+func _init() -> void:
+	get_all_items()
+
+
 func register_fog_of_war(node: TileMapLayer) -> void:
 	if not node or not node is TileMapLayer:
 		return
@@ -67,3 +71,11 @@ func _input(event: InputEvent) -> void:
 		get_tree().quit()
 	if event.is_action_pressed("switch"):
 		cycle_entities()
+
+
+func get_all_items() -> void:
+	var dir_access: DirAccess = DirAccess.open("res://resources/items/")
+	if not dir_access:
+		return
+	var files: PackedStringArray = dir_access.get_files()
+	print(files)

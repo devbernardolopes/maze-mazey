@@ -3,6 +3,7 @@ class_name Hud
 extends CanvasLayer
 
 const PLAYER_SLOT = preload("res://scenes/hud/player_slot.tscn")
+const ITEM_UI = preload("res://scenes/hud/item_ui.tscn")
 
 @export var margin: float = 6.00
 

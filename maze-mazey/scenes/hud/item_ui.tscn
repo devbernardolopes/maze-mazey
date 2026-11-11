@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://j8u8gmotgr8o"]
+
+[ext_resource type="Script" uid="uid://cvdqd33it8od4" path="res://scripts/hud/item_ui.gd" id="1_usqv3"]
+
+[node name="ItemUi" type="Control" unique_id=1977699165]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_usqv3")
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=458211242]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Visual" type="TextureRect" parent="Container" unique_id=368500357]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container" unique_id=1168387529]
+layout_mode = 2
