@@ -24,7 +24,12 @@
 [ext_resource type="Shader" uid="uid://d1626gr5kxqib" path="res://shaders/simple_crt_vhs.gdshader" id="15_7f6e7"]
 [ext_resource type="Shader" uid="uid://b8cjkjsxib6q6" path="res://shaders/lightweight_crt.gdshader" id="16_kk3rw"]
 [ext_resource type="Shader" uid="uid://cl2q4ytt753le" path="res://shaders/vhs_and_crt_monitor.gdshader" id="17_3kwp1"]
-[ext_resource type="Texture2D" uid="uid://dxcyjp13dnf0r" path="res://icon.svg" id="21_5qg6o"]
+[ext_resource type="Texture2D" uid="uid://bb5g4c426dsu6" path="res://assets/hud/menu.png" id="22_exv6n"]
+[ext_resource type="Texture2D" uid="uid://tmvd677cnw6i" path="res://assets/hud/character.png" id="22_v7xte"]
+[ext_resource type="Texture2D" uid="uid://ctpn7qm2ne3wp" path="res://assets/hud/grimoire.png" id="24_y3mqg"]
+[ext_resource type="Texture2D" uid="uid://cyv5cjmk8a14k" path="res://assets/hud/rest.png" id="25_neukn"]
+[ext_resource type="Texture2D" uid="uid://d4lj6mfrquds5" path="res://assets/hud/ground.png" id="26_pxtfa"]
+[ext_resource type="Texture2D" uid="uid://ds3cc67vo711e" path="res://assets/hud/inventory.png" id="27_hf2e2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7ahc8"]
 texture = ExtResource("13_tqeu6")
@@ -239,29 +244,59 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Ground" type="Control" parent="Hud/MarginContainer" unique_id=1708114866]
+[node name="Menu" type="Control" parent="Hud/MarginContainer" unique_id=643445896]
 layout_mode = 2
 
-[node name="VScrollBar" type="VScrollBar" parent="Hud/MarginContainer/Ground" unique_id=177458535]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="Contents" type="VBoxContainer" parent="Hud/MarginContainer/Ground" unique_id=1958425553]
+[node name="MenuIcon" type="TextureRect" parent="Hud/MarginContainer/Menu" unique_id=1049963457]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("22_exv6n")
 
-[node name="Item" type="HBoxContainer" parent="Hud/MarginContainer/Ground/Contents" unique_id=857837920]
+[node name="Entity" type="Control" parent="Hud/MarginContainer" unique_id=1082750220]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Hud/MarginContainer/Ground/Contents/Item" unique_id=316875683]
-layout_mode = 2
-texture = ExtResource("21_5qg6o")
+[node name="EntityIcon" type="TextureRect" parent="Hud/MarginContainer/Entity" unique_id=1548142819]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("22_v7xte")
 
-[node name="Label" type="Label" parent="Hud/MarginContainer/Ground/Contents/Item" unique_id=370301636]
+[node name="Grimoire" type="Control" parent="Hud/MarginContainer" unique_id=1302517577]
 layout_mode = 2
-text = "gdgfgdf gdfgdfgf"
+
+[node name="GrimoireIcon" type="TextureRect" parent="Hud/MarginContainer/Grimoire" unique_id=1990682611]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("24_y3mqg")
+
+[node name="Rest" type="Control" parent="Hud/MarginContainer" unique_id=907959354]
+layout_mode = 2
+
+[node name="RestIcon" type="TextureRect" parent="Hud/MarginContainer/Rest" unique_id=1875372431]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("25_neukn")
+
+[node name="Ground" type="Control" parent="Hud/MarginContainer" unique_id=1708114866]
+layout_mode = 2
+
+[node name="GroundIcon" type="TextureRect" parent="Hud/MarginContainer/Ground" unique_id=984566029]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("26_pxtfa")
+
+[node name="Inventory" type="Control" parent="Hud/MarginContainer" unique_id=594687552]
+layout_mode = 2
+
+[node name="InventoryIcon" type="TextureRect" parent="Hud/MarginContainer/Inventory" unique_id=573187374]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("27_hf2e2")
 
 [node name="PlayerEntitiesNode" type="Node2D" parent="Hud" unique_id=1648236602]
 

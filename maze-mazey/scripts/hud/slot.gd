@@ -13,6 +13,9 @@ var is_selected: bool = false:
 
 func _ready() -> void:
 	visual = _find_visual()
+	# TODO: I don't know why the following line isn't working. Like, it finds
+	# the node but it doesn't apply the color to self_modulate in hud.gd.
+	#visual = GameManager.find_control(self, "AnimatedSprite2D") as AnimatedSprite2D
 	if not visual:
 		visual = AnimatedSprite2D.new()
 		visual.sprite_frames = SpriteFrames.new()

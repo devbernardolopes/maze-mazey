@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bwv6uwagc3b86"]
+
+[ext_resource type="Script" uid="uid://bahhoxmleoll" path="res://scripts/hud/text_label.gd" id="1_j7ti1"]
+
+[node name="TextLabel" type="Control" unique_id=1016744866]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j7ti1")
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=409751713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Container" unique_id=1133832501]
+layout_mode = 2
+text = "Title of the property:"
+
+[node name="Content" type="Label" parent="Container" unique_id=1771306337]
+layout_mode = 2
+text = "Text content of the property."

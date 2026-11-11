@@ -55,7 +55,7 @@ func _ready() -> void:
 		if not GameManager.current_entity_changed.is_connected(_on_current_entity_changed):
 			GameManager.current_entity_changed.connect(_on_current_entity_changed)
 		if not controller:
-			controller = _find_controller()
+			controller = Static.find_control(self, "PlayerController")
 		if playable:
 			GameManager.register_entity(self)
 	## In-game, game-related rules and stuff.
@@ -442,10 +442,3 @@ func _set_idle_animation() -> void:
 	if visual.sprite_frames.has_animation(animation):
 		visual.animation = animation
 		visual.stop()
-
-
-func _find_controller() -> EntityController:
-	for child: Node in get_children():
-		if child is EntityController:
-			return child as EntityController
-	return null

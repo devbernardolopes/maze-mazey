@@ -16,17 +16,17 @@ var occluder: LightOccluder2D = null
 
 
 func _ready() -> void:
-	visual = _find_visual()
+	visual = Static.find_control(self, "AnimatedSprite2D")
 	if not visual:
 		visual = AnimatedSprite2D.new()
 		add_child(visual)
-	collision = _find_collision()
+	collision = Static.find_control(self, "CollisionShape2D")
 	if not collision:
 		collision = CollisionShape2D.new()
 		collision.shape = RectangleShape2D.new()
 		(collision.shape as RectangleShape2D).size = Vector2.ONE * Helper.TILE_SIZE
 		add_child(collision)
-	occluder = _find_occluder()
+	occluder = Static.find_control(self, "LightOccluder2D")
 	if not occluder:
 		occluder = LightOccluder2D.new()
 		occluder.occluder = OccluderPolygon2D.new()
@@ -40,27 +40,6 @@ func _ready() -> void:
 	occluder.show_behind_parent = true
 	occluder.occluder.cull_mode = OccluderPolygon2D.CULL_COUNTER_CLOCKWISE
 	_refresh_visual()
-
-
-func _find_visual() -> AnimatedSprite2D:
-	for child: Node in get_children():
-		if child is AnimatedSprite2D:
-			return child as AnimatedSprite2D
-	return null
-
-
-func _find_collision() -> CollisionShape2D:
-	for child: Node in get_children():
-		if child is CollisionShape2D:
-			return child as CollisionShape2D
-	return null
-
-
-func _find_occluder() -> LightOccluder2D:
-	for child: Node in get_children():
-		if child is LightOccluder2D:
-			return child as LightOccluder2D
-	return null
 
 
 func _refresh_visual() -> void:

@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cum32vddk8h52"]
+
+[ext_resource type="Script" uid="uid://b5kytk5jmoj7b" path="res://scripts/hud/entity_ui.gd" id="1_ybt7o"]
+[ext_resource type="Script" uid="uid://bahhoxmleoll" path="res://scripts/hud/text_label.gd" id="2_bjboh"]
+[ext_resource type="PackedScene" uid="uid://bwv6uwagc3b86" path="res://scenes/hud/text_label.tscn" id="3_4l20i"]
+
+[node name="EntityUi" type="Control" unique_id=250266349]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ybt7o")
+
+[node name="Container" type="VBoxContainer" parent="." unique_id=1528054572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Name" type="Control" parent="Container" unique_id=1218242071]
+layout_mode = 2
+script = ExtResource("2_bjboh")
+metadata/_custom_type_script = "uid://bahhoxmleoll"
+
+[node name="HSeparator" type="HSeparator" parent="Container" unique_id=1903351466]
+layout_mode = 2
+
+[node name="Abilities" type="HBoxContainer" parent="Container" unique_id=1359702755]
+layout_mode = 2
+
+[node name="Str" parent="Container/Abilities" unique_id=1016744866 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "STR"
+content = "0"
+
+[node name="Dex" parent="Container/Abilities" unique_id=240597501 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "Dex"
+content = "0"
+
+[node name="Con" parent="Container/Abilities" unique_id=1662370058 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "CON"
+content = "0"
+
+[node name="Int" parent="Container/Abilities" unique_id=948408410 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "INT"
+content = "0"
+
+[node name="Wis" parent="Container/Abilities" unique_id=1388320219 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "WIS"
+content = "0"
+
+[node name="Cha" parent="Container/Abilities" unique_id=1239950701 instance=ExtResource("3_4l20i")]
+layout_mode = 2
+title = "CHA"
+content = "0"

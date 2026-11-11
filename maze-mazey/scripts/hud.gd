@@ -44,6 +44,7 @@ func _refresh_visual() -> void:
 				# slot.visual.self_modulate = player_entity.data.color line
 				if slot and slot.visual:
 					slot.visual.self_modulate = player_entity.data.color
+					print(player_entity.data.color)
 					slot.overlay.visible = player_entity == GameManager.current_player_entity
 					slot.position = bottom_left
 					slot.position.x = margin + (i * Helper.TILE_LENGTH)
